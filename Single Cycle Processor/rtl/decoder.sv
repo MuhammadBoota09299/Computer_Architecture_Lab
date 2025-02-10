@@ -1,4 +1,4 @@
-module decoder 
+module DECODER 
 import package::*;
 (
     input logic [31:0]instruction,
