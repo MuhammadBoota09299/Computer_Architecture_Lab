@@ -11,7 +11,7 @@ always_comb begin
 funct3=instruction[12:14];
     case (opcode)
         R_TYPE:begin
-            alu_op=funct3;
+            alu_op={funct3,instruction[30]};
             reg_wr=1'b1;
         end 
         default: 
