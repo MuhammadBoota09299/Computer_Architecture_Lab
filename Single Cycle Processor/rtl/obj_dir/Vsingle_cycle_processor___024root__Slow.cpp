@@ -1,0 +1,24 @@
+// Verilated -*- C++ -*-
+// DESCRIPTION: Verilator output: Design implementation internals
+// See Vsingle_cycle_processor.h for the primary calling header
+
+#include "Vsingle_cycle_processor__pch.h"
+#include "Vsingle_cycle_processor__Syms.h"
+#include "Vsingle_cycle_processor___024root.h"
+
+void Vsingle_cycle_processor___024root___ctor_var_reset(Vsingle_cycle_processor___024root* vlSelf);
+
+Vsingle_cycle_processor___024root::Vsingle_cycle_processor___024root(Vsingle_cycle_processor__Syms* symsp, const char* v__name)
+    : VerilatedModule{v__name}
+    , vlSymsp{symsp}
+ {
+    // Reset structure values
+    Vsingle_cycle_processor___024root___ctor_var_reset(this);
+}
+
+void Vsingle_cycle_processor___024root::__Vconfigure(bool first) {
+    (void)first;  // Prevent unused variable warning
+}
+
+Vsingle_cycle_processor___024root::~Vsingle_cycle_processor___024root() {
+}
