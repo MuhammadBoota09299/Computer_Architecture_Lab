@@ -2,9 +2,9 @@
 # DESCRIPTION: Verilator output: Makefile for building Verilated archive or executable
 #
 # Execute this makefile from the object directory:
-#    make -f Vsingle_cycle_processor.mk
+#    make -f Vsingle_cycle_tb.mk
 
-default: Vsingle_cycle_processor
+default: Vsingle_cycle_tb
 
 ### Constants...
 # Perl executable (from $PERL, defaults to 'perl' if not set)
@@ -32,9 +32,9 @@ VM_SC_TARGET_ARCH = linux
 
 ### Vars...
 # Design prefix (from --prefix)
-VM_PREFIX = Vsingle_cycle_processor
+VM_PREFIX = Vsingle_cycle_tb
 # Module prefix (from --prefix)
-VM_MODPREFIX = Vsingle_cycle_processor
+VM_MODPREFIX = Vsingle_cycle_tb
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 
@@ -51,7 +51,7 @@ VM_USER_DIR = \
 
 ### Default rules...
 # Include list of all generated classes
-include Vsingle_cycle_processor_classes.mk
+include Vsingle_cycle_tb_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
 
@@ -60,7 +60,7 @@ VPATH += $(VM_USER_DIR)
 
 
 ### Link rules... (from --exe)
-Vsingle_cycle_processor: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+Vsingle_cycle_tb: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 
