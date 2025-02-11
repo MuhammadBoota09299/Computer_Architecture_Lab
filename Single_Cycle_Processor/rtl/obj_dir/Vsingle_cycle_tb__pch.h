@@ -3,11 +3,11 @@
 //
 // Internal details; most user sources do not need this header,
 // unless using verilator public meta comments.
-// Suggest use Vsingle_cycle_processor.h instead.
+// Suggest use Vsingle_cycle_tb.h instead.
 
 
-#ifndef VERILATED_VSINGLE_CYCLE_PROCESSOR__PCH_H_
-#define VERILATED_VSINGLE_CYCLE_PROCESSOR__PCH_H_  // guard
+#ifndef VERILATED_VSINGLE_CYCLE_TB__PCH_H_
+#define VERILATED_VSINGLE_CYCLE_TB__PCH_H_  // guard
 
 // GCC and Clang only will precompile headers (PCH) for the first header.
 // So, make sure this is the one and only PCH.
@@ -20,8 +20,8 @@
 
 #include "verilated.h"
 
-#include "Vsingle_cycle_processor__Syms.h"
-#include "Vsingle_cycle_processor.h"
+#include "Vsingle_cycle_tb__Syms.h"
+#include "Vsingle_cycle_tb.h"
 
 // Additional include files added using '--compiler-include'
 
