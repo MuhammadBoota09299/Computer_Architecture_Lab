@@ -5,7 +5,7 @@ module registerfile (
     output logic [31:0]rdata1,rdata2
 );
     logic [31:0]register_file [31:0]='{default:0};
-    always_ff @( posedge clock ) begin 
+    always_ff @( negedge clock ) begin 
         if (reset)begin
           register_file <= '{default:0};  
         end
