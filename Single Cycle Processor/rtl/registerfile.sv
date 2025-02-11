@@ -6,10 +6,10 @@ module registerfile (
 );
     logic [31:0]register_file [31:0]='{default:0};
     always_ff @( posedge clock ) begin 
-        if (waddr==0) begin
-            register_file[0]<=32'b0;
+        if (reset)begin
+          register_file <= '{default:0};  
         end
-        else if(reg_wr) begin
+        else if(reg_wr && (waddr!=5'b0)) begin
             register_file[waddr]<=wdata;
         end
     end
