@@ -4,21 +4,30 @@ SRC_FILES = includes/packages.sv alu.sv decoder.sv instruction_memory.sv pc.sv p
 # Include directory
 INCLUDE_DIR = ./includes
 
-# Verilator executable
-VERILATOR = verilator
+# ModelSim commands
+VLIB = vlib
+VLOG = vlog
+VSIM = vsim
+
+# Work library
+WORK_LIB = work
 
 # Default target to compile and run the simulation
-all:
-	# Lint the Verilog files
-	$(VERILATOR) --lint-only --sv --timing $(SRC_FILES) -I$(INCLUDE_DIR)
+all: compile simulate
 
-	# Compile the Verilog files and generate the executable, ignoring specific warnings
-	$(VERILATOR) --cc --exe --sv $(SRC_FILES) -I$(INCLUDE_DIR) --top-module single_cycle_tb --timing -Wall --trace --build \
-		-Wno-IMPORTSTAR -Wno-UNUSEDSIGNAL
+# Create work library
+compile:
+	@echo "Creating work library..."
+	$(VLIB) $(WORK_LIB)
 
-	# Run the generated simulation executable
-	./obj_dir/Vsingle_cycle_tb
+	@echo "Compiling Verilog files..."
+	$(VLOG) -sv +incdir+$(INCLUDE_DIR) $(SRC_FILES)
+
+# Run the simulation
+simulate:
+	@echo "Running simulation..."
+	$(VSIM) -c -do "run -all; quit" single_cycle_tb
 
 # Clean up generated files
 clean:
-	rm -rf obj_dir *.vcd
+	rm -rf $(WORK_LIB) transcript *.vcd *.wlf

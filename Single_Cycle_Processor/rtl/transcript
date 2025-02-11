@@ -1,0 +1,19 @@
+# vsim -c -do "run -all; quit" single_cycle_tb 
+# Start time: 15:55:30 on Feb 11,2025
+# Loading sv_std.std
+# Loading work.single_cycle_tb
+# Loading work.single_cycle_processor
+# Loading work.pc
+# Loading work.pc_add
+# Loading work.instruction_memory
+# Loading work.registerfile
+# Loading work.packages
+# Loading work.decoder_sv_unit
+# Loading work.decoder
+# Loading work.alu_sv_unit
+# Loading work.alu
+# run -all
+# ** Note: $finish    : single_cycle_tb.sv(25)
+#    Time: 110 ps  Iteration: 0  Instance: /single_cycle_tb
+# End time: 15:55:31 on Feb 11,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
