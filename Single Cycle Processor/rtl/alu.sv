@@ -1,8 +1,7 @@
-module ALU 
-import package::*;
-(
-    input logic [31:0]a,b,
-    input logic [3:0]alu_op,
+import packages::*;
+module alu (
+    input logic [31:0]rs1,rs2,
+    input logic [3:0] alu_op,
     output logic [31:0]result
 );
     always_comb begin 

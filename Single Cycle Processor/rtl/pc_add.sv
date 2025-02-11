@@ -1,4 +1,4 @@
-module PC_ADD (
+module pc_add (
     input logic [31:0]pc_next,
     output logic [31:0]pc
 );
