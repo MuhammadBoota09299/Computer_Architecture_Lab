@@ -23,7 +23,7 @@ rd_wr_mem=funct3;
             wb_sel=2'b0;
             br_type=PC;
         end 
-        I_TYPE || LOAD:begin
+        I_TYPE , LOAD:begin
             alu_op=ADD;
             reg_wr=1'b1;
             immediate = { {20{instruction[31]}}, instruction[31:20] };
@@ -49,8 +49,27 @@ rd_wr_mem=funct3;
             sel_A=1'b1;
             sel_B=1'b1;
             mem_wr=1'b0;
-            immediate={{19{instruction[31]}},instruction[7],instruction[30:25],instruction[11:8],1'b0};
-
+            immediate={{19{instruction[31]}},instruction[31],instruction[7],instruction[30:25],instruction[11:8],1'b0};
+        end
+        LUI , AUIPC :begin
+            alu_op=(opcode==LUI) ? PASS: ADD;
+            reg_wr=1'b1;
+            sel_A =1'b1;
+            sel_B =1'b1;
+            br_type=PC;
+            wb_sel =2'b0;
+            immediate={instruction[31:12], 12'b0};
+            mem_wr=1'b0;
+        end
+        JAL,JALR:begin
+            alu_op=ADD;
+            reg_wr=1'b1;
+            sel_A=(opcode==JAL) ? 1'b1:1'b0;
+            sel_B=1'b1;
+            br_type=ALU;
+            wb_sel=2'b10;
+            mem_wr=1'b0;
+            immediate=(opcode==JAL) ? {{19{instruction[31]}},instruction[31], instruction[19:12], instruction[20], instruction[30:21], 1'b0} :{ {20{instruction[31]}}, instruction[31:20] };
         end
         default:begin
             alu_op=4'b0;

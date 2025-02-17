@@ -22,7 +22,8 @@ package packages;
         SRL  = 4'b1010,
         SRA  = 4'b1011,
         OR   = 4'b1100,
-        AND  = 4'b1110
+        AND  = 4'b1110,
+        PASS = 4'b0011
     } Alu_op;
 
     typedef enum logic [2:0] {
