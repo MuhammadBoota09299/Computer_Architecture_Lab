@@ -1,5 +1,5 @@
 # Verilog source files
-SRC_FILES = includes/packages.sv alu.sv decoder.sv instruction_memory.sv pc.sv pc_add.sv registerfile.sv data_memory.sv single_cycle_processor.sv mux2_1.sv mux3_1.sv single_cycle_tb.sv
+SRC_FILES = includes/packages.sv alu.sv decoder.sv instruction_memory.sv pc.sv pc_add.sv registerfile.sv data_memory.sv single_cycle_processor.sv mux2_1.sv mux3_1.sv branch.sv single_cycle_tb.sv
 
 # Include directory
 INCLUDE_DIR = ./includes
