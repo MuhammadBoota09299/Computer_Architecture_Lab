@@ -29,6 +29,14 @@ rd_wr_mem=funct3;
             wb_sel = (opcode == LOAD) ? 2'b1 : 2'b0;
             mem_wr=1'b0;
         end
+        STORE:begin
+            alu_op=ADD;
+            reg_wr=1'b0;
+            mem_wr=1'b1;
+            sel_B=1'b1;
+            wb_sel=2'b0;
+            immediate={{20{instruction[31]}},instruction[31:25], instruction[11:7]};
+        end
         default:begin
             alu_op=4'b0;
             reg_wr=1'b0;
