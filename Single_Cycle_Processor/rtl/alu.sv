@@ -16,6 +16,7 @@ module alu (
             SRA:  result = $signed(rs1) >>> rs2[4:0];             // Shift Right Arithmetic
             SLT:  result = ($signed(rs1) < $signed(rs2)) ? 1 : 0; // Set Less Than (signed)
             SLTU: result = (rs1 < rs2) ? 1 : 0;                   // Set Less Than Unsigned
+            PASS: result = rs2;                                   // PASS through rs2
             default: result = 32'b0;                              // Default case
         endcase
     end
