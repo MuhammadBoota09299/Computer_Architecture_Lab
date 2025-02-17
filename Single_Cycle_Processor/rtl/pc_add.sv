@@ -1,9 +1,9 @@
 module pc_add (
-    input logic [31:0]pc_next,
-    output logic [31:0]pc
+    input logic [31:0]pc,
+    output logic [31:0]pc_next
 );
 always_comb begin
-    pc=pc_next+4;
+    pc_next=pc+4;
 end
     
 endmodule

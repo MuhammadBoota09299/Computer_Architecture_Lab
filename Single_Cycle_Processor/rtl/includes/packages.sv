@@ -37,7 +37,7 @@ package packages;
     typedef enum logic [2:0] {
         LB_SB = 3'b000,
         LH_SH = 3'b001,
-        LW_SB = 3'b010,
+        LW_SW = 3'b010,
         LBU   = 3'b100,
         LHU   = 3'b101
     } load_store;
