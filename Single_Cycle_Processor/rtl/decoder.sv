@@ -49,6 +49,7 @@ rd_wr_mem=funct3;
             sel_A=1'b1;
             sel_B=1'b1;
             mem_wr=1'b0;
+            immediate={{19{instruction[31]}},instruction[7],instruction[30:25],instruction[11:8],1'b0};
 
         end
         default:begin
@@ -56,8 +57,10 @@ rd_wr_mem=funct3;
             reg_wr=1'b0;
             immediate =32'b0;
             sel_B=1'b0;
+            sel_A=1'b0;
             wb_sel=1'b0;
             mem_wr=1'b0;
+            br_type=PC;
             end 
     endcase
         
