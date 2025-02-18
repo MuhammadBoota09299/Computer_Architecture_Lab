@@ -10,7 +10,7 @@ logic [7:0]memory[31:0]='{default:0};
         if (reset) begin
             memory<='{default:0};
         end
-        else if (mem_wr && addr_mem!=32'b0)begin
+        else if (mem_wr && addr_mem > 32'b0)begin
             case (rd_wr_mem)
                 LB_SB:memory[addr_mem]   <= wdata_mem[7:0];
                 LH_SH:begin
