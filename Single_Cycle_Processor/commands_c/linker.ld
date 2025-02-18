@@ -3,7 +3,7 @@ ENTRY( reset_handler )
 
 MEMORY
 { 
-  FLASH (rx)  : ORIGIN = 0x00001000, LENGTH = 16K
+  FLASH (rx)  : ORIGIN = 0x00000000, LENGTH = 16K
   RAM   (rwx) : ORIGIN = 0x80000000, LENGTH = 4K
 }
 

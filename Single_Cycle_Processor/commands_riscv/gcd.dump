@@ -4,19 +4,23 @@ gcd:     file format elf64-littleriscv
 
 Disassembly of section .text:
 
-00000000000100b0 <gcd>:
-   100b0:	00940c63          	beq	s0,s1,100c8 <stop>
-   100b4:	00944663          	blt	s0,s1,100c0 <less>
-   100b8:	40940433          	sub	s0,s0,s1
-   100bc:	ff5ff06f          	j	100b0 <gcd>
+00000000000100b0 <_start>:
+   100b0:	05400413          	li	s0,84
+   100b4:	03c00493          	li	s1,60
 
-00000000000100c0 <less>:
-   100c0:	408484b3          	sub	s1,s1,s0
-   100c4:	fedff06f          	j	100b0 <gcd>
+00000000000100b8 <gcd>:
+   100b8:	00940c63          	beq	s0,s1,100d0 <stop>
+   100bc:	00944663          	blt	s0,s1,100c8 <less>
+   100c0:	40940433          	sub	s0,s0,s1
+   100c4:	ff5ff06f          	j	100b8 <gcd>
 
-00000000000100c8 <stop>:
-   100c8:	00802423          	sw	s0,8(zero) # 8 <gcd-0x100a8>
-   100cc:	00802503          	lw	a0,8(zero) # 8 <gcd-0x100a8>
+00000000000100c8 <less>:
+   100c8:	408484b3          	sub	s1,s1,s0
+   100cc:	fedff06f          	j	100b8 <gcd>
 
-00000000000100d0 <end>:
-   100d0:	0000006f          	j	100d0 <end>
+00000000000100d0 <stop>:
+   100d0:	00802423          	sw	s0,8(zero) # 8 <_start-0x100a8>
+   100d4:	00802503          	lw	a0,8(zero) # 8 <_start-0x100a8>
+
+00000000000100d8 <end>:
+   100d8:	0000006f          	j	100d8 <end>

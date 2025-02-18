@@ -7,9 +7,11 @@ module registerfile (
     logic [31:0]register_file [31:0]='{default:0};
     always_ff @( negedge clock ) begin 
         if (reset)begin
-          register_file <= '{default:0};  
+          //register_file <= '{default:0}; 
+          register_file[8]<=32'd018;
+          register_file[9]<=32'd045;
         end
-        else if(reg_wr && (waddr!=5'b0)) begin
+        else if(reg_wr && (waddr > 5'b0)) begin
             register_file[waddr]<=wdata;
         end
     end
@@ -17,5 +19,6 @@ module registerfile (
         rdata1=register_file[raddr1];
         rdata2=register_file[raddr2];
     end
+
 
 endmodule

@@ -21,7 +21,7 @@ module single_cycle_tb;
         reset = 1;
         #10 reset = 0;  // De-assert reset after 10ns
 
-        #100;  // Run simulation for 100ns
+        #300;  // Run simulation for 100ns
         $finish; // End simulation
     end
 
