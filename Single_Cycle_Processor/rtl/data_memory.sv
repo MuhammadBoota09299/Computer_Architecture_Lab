@@ -3,7 +3,7 @@ module data_memory (
     input logic [31:0]wdata_mem,addr_mem,
     input logic [2:0]rd_wr_mem,
     input logic mem_wr,clock,reset,
-    output logic [31:0]rdata
+    output logic [31:0]rdata_mem
 );
 logic [7:0]memory[31:0]='{default:0};
     always_ff @( negedge clock ) begin 
@@ -30,12 +30,12 @@ logic [7:0]memory[31:0]='{default:0};
     always_comb begin 
         addr_mem=addr_mem>>1;
         case (rd_wr_mem)
-            LB_SB  : rdata = {{24{memory[addr_mem][7]}}, memory[addr_mem]};
-            LBU    : rdata = {24'b0,memory[addr_mem]};
-            LH_SH  : rdata = {{16{memory[addr_mem+1][7]}}, memory[addr_mem+1], memory[addr_mem]};
-            LHU    : rdata = {16'b0,memory[addr_mem+1],memory[addr_mem]};
-            LW_SW  : rdata = {memory[addr_mem+3],memory[addr_mem +2],memory[addr_mem+1],memory[addr_mem]};
-            default: rdata = {{24{memory[addr_mem][7]}}, memory[addr_mem]};
+            LB_SB  : rdata_mem = {{24{memory[addr_mem][7]}}, memory[addr_mem]};
+            LBU    : rdata_mem = {24'b0,memory[addr_mem]};
+            LH_SH  : rdata_mem = {{16{memory[addr_mem+1][7]}}, memory[addr_mem+1], memory[addr_mem]};
+            LHU    : rdata_mem = {16'b0,memory[addr_mem+1],memory[addr_mem]};
+            LW_SW  : rdata_mem = {memory[addr_mem+3],memory[addr_mem +2],memory[addr_mem+1],memory[addr_mem]};
+            default: rdata_mem = {{24{memory[addr_mem][7]}}, memory[addr_mem]};
         endcase
     end
 endmodule

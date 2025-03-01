@@ -1,7 +1,7 @@
 import packages::*;
 module decoder (
     input logic [31:0]instruction,
-    output logic reg_wr,sel_B,mem_wr,sel_A,
+    output logic reg_wr,sel_B,mem_wr,sel_A,stall,
     output logic [1:0]wb_sel,
     output logic [2:0]rd_wr_mem,br_type,
     output logic [31:0]immediate,
@@ -13,6 +13,7 @@ always_comb begin
 opcode = instruction[6:0];
 funct3=instruction[14:12];
 rd_wr_mem=funct3;
+stall=1'b0;
     case (opcode)
         R_TYPE:begin
             alu_op={funct3,instruction[30]};
@@ -69,6 +70,7 @@ rd_wr_mem=funct3;
             br_type=ALU;
             wb_sel=2'b10;
             mem_wr=1'b0;
+            stall=1'b1;
             immediate=(opcode==JAL) ? {{19{instruction[31]}},instruction[31], instruction[19:12], instruction[20], instruction[30:21], 1'b0} :{ {20{instruction[31]}}, instruction[31:20] };
         end
         default:begin
