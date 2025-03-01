@@ -2,16 +2,16 @@
 module pipline_fetch_to_decode (
     input clock,reset,
     input logic [31:0]pc_fetch,instruction_fetch,
-    output logic [31:0]pc_decode,instruction_decode;
+    output logic [31:0]pc_execute,instruction_execute;
 );
     always_ff @( posedge clock,posedge reset ) begin 
         if (reset) begin
-            pc_decode<=32'b0;
-            instruction_decode<=32'b00000013;
+            pc_execute<=32'b0;
+            instruction_execute<=32'b00000013;
         end
         else begin
-            pc_decode <=pc_fetch;
-            instruction_decode <=instruction_fetch;
+            pc_execute <=pc_fetch;
+            instruction_execute <=instruction_fetch;
         end
     end
 endmodule
@@ -35,6 +35,16 @@ module pipline_execute_to_memory (
             reg_wr_mem <=1'b0;
             mem_wr_mem <=1'b0;
             rd_wr_mem_mem <=3'b0;
+        end
+        else begin
+             pc_mem <= pc_execute;
+            alu_mem <= alu_execute;
+            mem_wdata_mem <= mem_wdata_execute;
+            instruction_mem <= instruction_execute;
+            waddr_mem <= waddr_execute;
+            reg_wr_mem <=reg_wr_execute;
+            mem_wr_mem <=mem_wr_execute;
+            rd_wr_mem_mem <=rd_wr_mem_execute;
         end
     end
 endmodule
