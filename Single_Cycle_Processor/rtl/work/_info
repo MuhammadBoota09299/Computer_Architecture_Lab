@@ -13,7 +13,7 @@ valu
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
 Z2 DXx4 work 8 packages 0 22 lO`6mbZP;9hV9_JcggaI@0
 DXx4 work 11 alu_sv_unit 0 22 f4<ThJFd<QzAjYAmO_BD@0
-Z3 !s110 1739879196
+Z3 !s110 1740868941
 Z4 VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
@@ -26,13 +26,13 @@ R0
 Z5 w1739826383
 Z6 8alu.sv
 Z7 Falu.sv
-!i122 20
+!i122 42
 L0 2 22
 Z8 OV;L;2020.1;71
 31
-Z9 !s108 1739879196.000000
-!s107 single_cycle_tb.sv|branch.sv|mux3_1.sv|mux2_1.sv|single_cycle_processor.sv|data_memory.sv|registerfile.sv|pc_add.sv|pc.sv|instruction_memory.sv|decoder.sv|alu.sv|includes/packages.sv|
-Z10 !s90 -sv|+incdir+./includes|includes/packages.sv|alu.sv|decoder.sv|instruction_memory.sv|pc.sv|pc_add.sv|registerfile.sv|data_memory.sv|single_cycle_processor.sv|mux2_1.sv|mux3_1.sv|branch.sv|single_cycle_tb.sv|
+Z9 !s108 1740868941.000000
+!s107 single_cycle_tb.sv|pipline_reg.sv|branch.sv|mux3_1.sv|mux2_1.sv|single_cycle_processor.sv|data_memory.sv|registerfile.sv|pc_add.sv|pc.sv|instruction_memory.sv|decoder.sv|alu.sv|includes/packages.sv|
+Z10 !s90 -sv|+incdir+./includes|includes/packages.sv|alu.sv|decoder.sv|instruction_memory.sv|pc.sv|pc_add.sv|registerfile.sv|data_memory.sv|single_cycle_processor.sv|mux2_1.sv|mux3_1.sv|branch.sv|pipline_reg.sv|single_cycle_tb.sv|
 !i113 1
 o-sv
 Z11 !s92 -sv +incdir+./includes
@@ -53,12 +53,12 @@ R0
 R5
 R6
 R7
-!i122 20
+!i122 42
 Z13 L0 1 0
 R8
 31
 R9
-Z14 !s107 single_cycle_tb.sv|branch.sv|mux3_1.sv|mux2_1.sv|single_cycle_processor.sv|data_memory.sv|registerfile.sv|pc_add.sv|pc.sv|instruction_memory.sv|decoder.sv|alu.sv|includes/packages.sv|
+Z14 !s107 single_cycle_tb.sv|pipline_reg.sv|branch.sv|mux3_1.sv|mux2_1.sv|single_cycle_processor.sv|data_memory.sv|registerfile.sv|pc_add.sv|pc.sv|instruction_memory.sv|decoder.sv|alu.sv|includes/packages.sv|
 R10
 !i113 1
 o-sv
@@ -81,7 +81,7 @@ R0
 Z15 w1739823073
 Z16 8branch.sv
 Z17 Fbranch.sv
-!i122 20
+!i122 42
 L0 2 19
 R8
 31
@@ -108,7 +108,7 @@ R0
 R15
 R16
 R17
-!i122 20
+!i122 42
 R13
 R8
 31
@@ -128,15 +128,15 @@ R4
 r1
 !s85 0
 !i10b 1
-!s100 h[1?5Y2La2RdPSJE=Dd?31
-IFJ?D:>V]3CX@I>39VK]SX3
+!s100 ]Mfa_SPlmiFNlm^NN<26m1
+I_lWZeXAMn626WnP=UEYDX2
 !s105 data_memory_sv_unit
 S1
 R0
-Z18 w1739851466
+Z18 w1740866457
 Z19 8data_memory.sv
 Z20 Fdata_memory.sv
-!i122 20
+!i122 42
 L0 2 39
 R8
 31
@@ -163,7 +163,7 @@ R0
 R18
 R19
 R20
-!i122 20
+!i122 42
 R13
 R8
 31
@@ -177,22 +177,22 @@ R12
 vdecoder
 R1
 R2
-DXx4 work 15 decoder_sv_unit 0 22 FmCK94jo@iI<V6d^Y;ZgJ0
+DXx4 work 15 decoder_sv_unit 0 22 LziXV6FDRhWeNSIFZaPGd2
 R3
 R4
 r1
 !s85 0
 !i10b 1
-!s100 ]_W784a<9_CeeWX][`P0`1
-I4^c79[6LcF?WcW8dc^BNN1
+!s100 SJDGSo6ARUDghGhOkY:MI1
+Ibe0Z6EkHD4bT4>hIodF^j1
 !s105 decoder_sv_unit
 S1
 R0
-Z21 w1739826486
+Z21 w1740865629
 Z22 8decoder.sv
 Z23 Fdecoder.sv
-!i122 20
-L0 2 86
+!i122 42
+L0 2 88
 R8
 31
 R9
@@ -206,19 +206,19 @@ Xdecoder_sv_unit
 R1
 R2
 R3
-VFmCK94jo@iI<V6d^Y;ZgJ0
+VLziXV6FDRhWeNSIFZaPGd2
 r1
 !s85 0
 !i10b 1
-!s100 FD73_>>J:[3;FUT7BVDDA2
-IFmCK94jo@iI<V6d^Y;ZgJ0
+!s100 SEbGXFJ`Wkm6I@TKd5e7o3
+ILziXV6FDRhWeNSIFZaPGd2
 !i103 1
 S1
 R0
 R21
 R22
 R23
-!i122 20
+!i122 42
 R13
 R8
 31
@@ -239,10 +239,10 @@ I9B@KTQ;CWRbDV<?fcQ7?C3
 R4
 S1
 R0
-w1739879190
+Z25 w1740865612
 8instruction_memory.sv
 Finstruction_memory.sv
-!i122 20
+!i122 42
 L0 1 13
 R8
 r1
@@ -268,7 +268,7 @@ R0
 w1739802380
 8mux2_1.sv
 Fmux2_1.sv
-!i122 20
+!i122 42
 L0 1 7
 R8
 r1
@@ -294,7 +294,7 @@ R0
 w1739809856
 8mux3_1.sv
 Fmux3_1.sv
-!i122 20
+!i122 42
 L0 1 14
 R8
 r1
@@ -320,7 +320,7 @@ R0
 w1739826386
 8includes/packages.sv
 Fincludes/packages.sv
-!i122 20
+!i122 42
 L0 2 0
 R8
 r1
@@ -346,7 +346,7 @@ R0
 w1739822512
 8pc.sv
 Fpc.sv
-!i122 20
+!i122 42
 L0 1 15
 R8
 r1
@@ -372,8 +372,60 @@ R0
 w1739808953
 8pc_add.sv
 Fpc_add.sv
-!i122 20
+!i122 42
 L0 1 9
+R8
+r1
+!s85 0
+31
+R9
+R14
+R10
+!i113 1
+o-sv
+R11
+R12
+vpipline_execute_to_memory
+R1
+R3
+!i10b 1
+!s100 UJz[8]^z_`MenE7iSm;[B3
+R24
+IWX;MkP;ge;f57K@;n1Xi=3
+R4
+S1
+R0
+Z26 w1740868933
+Z27 8pipline_reg.sv
+Z28 Fpipline_reg.sv
+!i122 42
+L0 20 33
+R8
+r1
+!s85 0
+31
+R9
+R14
+R10
+!i113 1
+o-sv
+R11
+R12
+vpipline_fetch_to_decode
+R1
+R3
+!i10b 1
+!s100 jQRNldQLKJ78DiRLDJhE93
+R24
+IeaJd1J3PPiN[1TklRfN6Q3
+R4
+S1
+R0
+R26
+R27
+R28
+!i122 42
+L0 2 16
 R8
 r1
 !s85 0
@@ -395,10 +447,10 @@ I9`T@BGaj[W@O2PDKHO6]P1
 R4
 S1
 R0
-w1739871269
+R25
 8registerfile.sv
 Fregisterfile.sv
-!i122 20
+!i122 42
 L0 1 22
 R8
 r1
@@ -415,17 +467,17 @@ vsingle_cycle_processor
 R1
 R3
 !i10b 1
-!s100 HZaVG67Vak1I^K:80S4IL0
+!s100 neHZAVZo4NCn_]F4DfT[J0
 R24
-Ik@T=`16?Q2PHKEKVk[<5k1
+IE>mNghD>9RUGc:?Jf]@FJ3
 R4
 S1
 R0
-w1739823207
+w1740868405
 8single_cycle_processor.sv
 Fsingle_cycle_processor.sv
-!i122 20
-L0 1 32
+!i122 42
+L0 1 54
 R8
 r1
 !s85 0
@@ -447,10 +499,10 @@ IiA:1Gi>0Q:z8n62QO6BUh0
 R4
 S1
 R0
-w1739855734
+w1739883235
 8single_cycle_tb.sv
 Fsingle_cycle_tb.sv
-!i122 20
+!i122 42
 L0 1 34
 R8
 r1

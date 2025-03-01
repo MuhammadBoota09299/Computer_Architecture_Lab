@@ -1,11 +1,11 @@
 module single_cycle_processor (
     input logic reset,clock
 );
-logic [31:0]inst,inst,instruction,pc,pc_decode,pc_next,result,rdata1,rdata2,rs1,rs2,immediate,rdata_mem,reg_data,pc_in;
+logic [31:0]inst,instruction,instruction_mem,pc,pc_execute,pc_next,pc_mem,pc_next_mem,result,rdata1,rdata2,rs1,rs2,immediate,rdata_mem,wdata_mem,reg_data,pc_in,alu_mem;
 logic [3:0]alu_op;
-logic [2:0]rd_wr_mem,br_type;
-logic [1:0]wb_sel;
-logic reg_wr,sel_B,sel_A,mem_wr,br_taken;
+logic [2:0]rd_wr_mem,rd_wr_mem_mem,br_type;
+logic [1:0]wb_sel,wb_sel_mem;
+logic reg_wr,reg_wr_mem,sel_B,sel_A,mem_wr,mem_wr_mem,br_taken,stall;
 
 //-----------fetch phase----------------
 
@@ -41,14 +41,14 @@ branch branch_condition(.rdata1,.rdata2,.br_type,.br_taken);
 //---------------memory and writeback phase---------------
 
 //pipline registor
-pipline_execute_to_memory execute_to_memory_reg(.clock,.reset,.pc_execute,.alu_execute(result),.mem_wdata_execute(raddr2),
+pipline_execute_to_memory execute_to_memory_reg(.clock,.reset,.pc_execute,.alu_execute(result),.mem_wdata_execute(rdata2),
 .instruction_execute(instruction),.reg_wr_execute(reg_wr),.mem_wr_execute(mem_wr),.rd_wr_mem_execute(rd_wr_mem),.wb_sel_execute(wb_sel),
-.pc_mem, .alu_mem(addr_mem),.mem_wdata_mem(wdata_mem),.instruction_mem,.mem_wr_mem, rd_wr_mem_mem,reg_wr_mem,.wb_sel_mem);
+.pc_mem, .alu_mem,.mem_wdata_mem(wdata_mem),.instruction_mem,.mem_wr_mem, .rd_wr_mem_mem,.reg_wr_mem,.wb_sel_mem);
 //add 4 in pc of memory phase
 pc_add pc_mem_4_add(.pc(pc_mem),.pc_next(pc_next_mem));
 //data memory
-data_memory Data_memory(.clock,.reset,.addr_mem,.wdata_mem,.rdata_mem,.mem_wr(mem_wr_mem),.rd_wr_mem(rd_wr_mem_mem));
+data_memory Data_memory(.clock,.reset,.addr_mem(alu_mem>>1),.wdata_mem,.rdata_mem,.mem_wr(mem_wr_mem),.rd_wr_mem(rd_wr_mem_mem));
 //writeback mux
-mux3_1 writeback_mux(.input0(result),.input1(rdata_mem),.input2(pc_next_mem),.out(reg_data),.sel(wb_sel_mem));
+mux3_1 writeback_mux(.input0(alu_mem),.input1(rdata_mem),.input2(pc_next_mem),.out(reg_data),.sel(wb_sel_mem));
 
 endmodule

@@ -28,7 +28,6 @@ logic [7:0]memory[31:0]='{default:0};
         end
     end
     always_comb begin 
-        addr_mem=addr_mem>>1;
         case (rd_wr_mem)
             LB_SB  : rdata_mem = {{24{memory[addr_mem][7]}}, memory[addr_mem]};
             LBU    : rdata_mem = {24'b0,memory[addr_mem]};
