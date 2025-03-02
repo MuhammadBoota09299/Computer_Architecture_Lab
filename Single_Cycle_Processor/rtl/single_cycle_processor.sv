@@ -47,7 +47,7 @@ pipline_execute_to_memory execute_to_memory_reg(.clock,.reset,.pc_execute,.alu_e
 //add 4 in pc of memory phase
 pc_add pc_mem_4_add(.pc(pc_mem),.pc_next(pc_next_mem));
 //data memory
-data_memory Data_memory(.clock,.reset,.addr_mem(alu_mem>>1),.wdata_mem,.rdata_mem,.mem_wr(mem_wr_mem),.rd_wr_mem(rd_wr_mem_mem));
+data_memory Data_memory(.clock,.reset,.addr_mem(alu_mem),.wdata_mem,.rdata_mem,.mem_wr(mem_wr_mem),.rd_wr_mem(rd_wr_mem_mem));
 //writeback mux
 mux3_1 writeback_mux(.input0(alu_mem),.input1(rdata_mem),.input2(pc_next_mem),.out(reg_data),.sel(wb_sel_mem));
 

@@ -1,5 +1,5 @@
 # vsim -c -do "run -all; quit" single_cycle_tb 
-# Start time: 03:42:22 on Mar 02,2025
+# Start time: 10:55:09 on Mar 02,2025
 # Loading sv_std.std
 # Loading work.single_cycle_tb
 # Loading work.single_cycle_processor
@@ -21,9 +21,9 @@
 # Loading work.data_memory
 # Loading work.mux3_1
 # run -all
-# ** Warning: (vsim-PLI-3407) Too many data words read on line 34 of file "/home/aziz/Documents/Computer_Architecture_Lab/Single_Cycle_Processor/commands_c/build/main.txt". (Current address [32], address range [0:31])    : instruction_memory.sv(11)
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 33 of file "/home/aziz/Documents/Computer_Architecture_Lab/Single_Cycle_Processor/commands_riscv/build//gcd.txt". (Current address [32], address range [0:31])    : instruction_memory.sv(12)
 #    Time: 0 ps  Iteration: 0  Instance: /single_cycle_tb/uut/_instruction_memory
 # ** Note: $finish    : single_cycle_tb.sv(25)
 #    Time: 310 ps  Iteration: 0  Instance: /single_cycle_tb
-# End time: 03:42:22 on Mar 02,2025, Elapsed time: 0:00:00
+# End time: 10:55:09 on Mar 02,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 1

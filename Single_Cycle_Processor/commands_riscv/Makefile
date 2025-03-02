@@ -2,20 +2,29 @@
 RISCV_AS = riscv64-unknown-elf-as
 RISCV_OBJDUMP = riscv64-unknown-elf-objdump
 RISCV_LD = riscv64-unknown-elf-ld
-RISCV_SIM = spike  # Assuming you're using Spike as a simulator
+RISCV_OBJCOPY = riscv64-unknown-elf-objcopy
 
-# Files and Directories
+# Directories
 SRC_DIR = src
+BUILD_DIR = build
+
+# Files
 SRC = $(SRC_DIR)/gcd.s
-OBJ = gcd.o
-OUTPUT = gcd
-DUMP = gcd.dump
+OBJ = $(BUILD_DIR)/gcd.o
+OUTPUT = $(BUILD_DIR)/gcd
+DUMP = $(BUILD_DIR)/gcd.dump
+BIN = $(BUILD_DIR)/gcd.bin
+TXT = $(BUILD_DIR)/gcd.txt
 
 # Default target
-all: $(OUTPUT) dump run
+all: $(OUTPUT) dump bin txt
+
+# Ensure the build directory exists
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
 # Assemble the source file into an object file
-$(OBJ): $(SRC)
+$(OBJ): $(SRC) | $(BUILD_DIR)
 	$(RISCV_AS) -o $(OBJ) $(SRC)
 
 # Link the object file to create the executable
@@ -26,10 +35,14 @@ $(OUTPUT): $(OBJ)
 dump: $(OUTPUT)
 	$(RISCV_OBJDUMP) -d $(OUTPUT) > $(DUMP)
 
-# Run the program (ensure Spike or your RISC-V simulator is installed)
-run: $(OUTPUT)
-	$(RISCV_SIM) pk $(OUTPUT)
+# Convert ELF executable to binary format
+bin: $(OUTPUT)
+	$(RISCV_OBJCOPY) -O binary $(OUTPUT) $(BIN)
+
+# Convert binary to text format
+txt: $(BIN)
+	python3 maketxt.py $(BIN) > $(TXT)
 
 # Clean up generated files
 clean:
-	rm -f $(OBJ) $(OUTPUT) $(DUMP)
+	rm -rf $(BUILD_DIR)
