@@ -8,6 +8,7 @@ module instruction_memory (
     end
 
     initial begin
-    $readmemh("/home/aziz/Documents/Computer_Architecture_Lab/Single_Cycle_Processor/commands_c/build/main.txt",inst_memory);
+    //$readmemh("/home/aziz/Documents/Computer_Architecture_Lab/Single_Cycle_Processor/commands_c/build/main.txt",inst_memory);
+    $readmemh("/home/aziz/Documents/Computer_Architecture_Lab/Single_Cycle_Processor/commands_riscv/build//gcd.txt",inst_memory);
     end
 endmodule

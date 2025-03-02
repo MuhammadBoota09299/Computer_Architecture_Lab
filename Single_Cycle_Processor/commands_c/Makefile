@@ -11,11 +11,11 @@ build/startup.o: src/startup.s | build
 
 # Compile main.c
 build/main.o: src/main.c | build
-	riscv64-unknown-elf-gcc -O2 -c -o build/main.o src/main.c -march=rv32im -mabi=ilp32
+	riscv64-unknown-elf-gcc -c -o build/main.o src/main.c -march=rv32im -mabi=ilp32
 
 # Link objects
 build/main.elf: build/main.o build/startup.o linker.ld | build
-	riscv64-unknown-elf-gcc -O2 -o build/main.elf build/main.o build/startup.o -T linker.ld -nostdlib -march=rv32im -mabi=ilp32
+	riscv64-unknown-elf-gcc -o build/main.elf build/main.o build/startup.o -T linker.ld -nostdlib -march=rv32im -mabi=ilp32
 
 # Strip ELF
 build/main.strip: build/main.elf
