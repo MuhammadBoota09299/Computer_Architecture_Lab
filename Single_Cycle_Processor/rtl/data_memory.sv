@@ -5,7 +5,7 @@ module data_memory (
     input logic mem_wr,clock,reset,
     output logic [31:0]rdata_mem
 );
-logic [7:0]memory[31:0]='{default:0};
+logic [7:0]memory[100:0]='{default:0};
     always_ff @( negedge clock ) begin 
         if (reset) begin
             memory<='{default:0};

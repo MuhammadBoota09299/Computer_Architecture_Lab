@@ -1,7 +1,7 @@
 import packages::*;
 module decoder (
-    input logic [31:0]instruction,
-    output logic reg_wr,sel_B,mem_wr,sel_A,stall,
+    input logic [31:0]instruction,instruction_mem,
+    output logic reg_wr,sel_B,mem_wr,sel_A,stall,forward_sel_1,forward_sel_2,
     output logic [1:0]wb_sel,
     output logic [2:0]rd_wr_mem,br_type,
     output logic [31:0]immediate,
@@ -9,6 +9,7 @@ module decoder (
 );
 logic [2:0]funct3;
 logic [6:0]opcode;
+logic [4:0]waddr_mem,raddr1_decode,raddr2_decode;
 always_comb begin 
 opcode = instruction[6:0];
 funct3=instruction[14:12];
@@ -83,7 +84,21 @@ stall=1'b0;
             mem_wr=1'b0;
             br_type=PC;
             end 
-    endcase
-        
+    endcase      
 end 
+always_comb begin
+    forward_sel_2=1'b0;
+    forward_sel_2=1'b0;
+    waddr_mem=instruction_mem[11:7];
+    raddr1_decode=instruction[19:15];
+    raddr2_decode=instruction[24:20];
+    case (waddr_mem)
+        raddr1_decode:forward_sel_1=1'b1;
+        raddr2_decode:forward_sel_2=1'b1;
+        default:begin
+            forward_sel_1=1'b0;
+            forward_sel_2=1'b0;
+        end
+    endcase
+end
 endmodule
