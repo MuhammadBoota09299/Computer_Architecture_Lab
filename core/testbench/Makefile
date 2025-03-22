@@ -1,8 +1,22 @@
 # Verilog source files
-SRC_FILES = rtl/defines/packages.sv rtl/alu.sv ... rtl/core.sv testbench/core_tb.sv
+SRC_FILES = \
+    ../rtl/defines/packages.sv \
+    ../rtl/alu.sv \
+    ../rtl/branch.sv \
+    ../rtl/core.sv \
+    ../rtl/data_memory.sv \
+    ../rtl/decoder.sv \
+    ../rtl/instruction_memory.sv \
+    ../rtl/mux2_1.sv \
+    ../rtl/mux3_1.sv \
+    ../rtl/pc.sv \
+    ../rtl/pc_add.sv \
+    ../rtl/pipline_reg.sv \
+    ../rtl/registerfile.sv \
+    core_tb.sv
 
 # Include directory
-INCLUDE_DIR = ./defines
+INCLUDE_DIR = ../rtl/defines
 
 # ModelSim commands
 VLIB = vlib
@@ -13,7 +27,7 @@ VSIM = vsim
 WORK_LIB = work
 
 # Default target to compile and run the simulation
-all: compile simulate
+all: clean compile simulate
 
 # Create work library
 compile:
