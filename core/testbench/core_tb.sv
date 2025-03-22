@@ -1,11 +1,11 @@
-module single_cycle_tb;
+module core_tb;
 
     // Signals
     logic clock;
     logic reset;
 
     // Instantiate the processor
-    single_cycle_processor uut (
+    core uut (
         .clock(clock),
         .reset(reset)
     );
@@ -28,7 +28,7 @@ module single_cycle_tb;
     // Dump waveforms
     initial begin
         $dumpfile("waveform.vcd");
-        $dumpvars(0, single_cycle_tb);
+        $dumpvars(0, core_tb);
     end
 
 endmodule

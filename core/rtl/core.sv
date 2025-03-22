@@ -1,4 +1,4 @@
-module single_cycle_processor (
+module core (
     input logic reset,clock
 );
 logic [31:0]inst,instruction,instruction_mem,pc,pc_execute,pc_next,pc_mem,pc_next_mem,result,rdata1,data1,data2,rdata2,rs1,rs2,immediate,rdata_mem,wdata_mem,reg_data,pc_in,alu_mem;

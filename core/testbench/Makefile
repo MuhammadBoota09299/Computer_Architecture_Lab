@@ -1,8 +1,8 @@
 # Verilog source files
-SRC_FILES = rtl/includes/packages.sv rtl/alu.sv ... rtl/single_cycle_processor.sv test_bench/single_cycle_tb.sv
+SRC_FILES = rtl/defines/packages.sv rtl/alu.sv ... rtl/core.sv testbench/core_tb.sv
 
 # Include directory
-INCLUDE_DIR = ./includes
+INCLUDE_DIR = ./defines
 
 # ModelSim commands
 VLIB = vlib
@@ -26,7 +26,7 @@ compile:
 # Run the simulation
 simulate:
 	@echo "Running simulation..."
-	$(VSIM) -c -do "run -all; quit" single_cycle_tb
+	$(VSIM) -c -do "run -all; quit" core_tb
 
 # Clean up generated files
 clean:
