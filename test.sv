@@ -62,6 +62,9 @@ module tb_ldpc_encoder;
                 $display("ERROR: src_err signal received from the core! Stopping execution.");
                 repeat(2) @(posedge clk);
                 $stop;
+            else begin
+                
+            end
             end
         end
     endtask
