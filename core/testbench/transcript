@@ -1,5 +1,5 @@
 # vsim -c -do "run -all; quit" core_tb 
-# Start time: 18:39:20 on Mar 22,2025
+# Start time: 18:51:05 on Mar 22,2025
 # Loading sv_std.std
 # Loading work.core_tb
 # Loading work.core
@@ -25,5 +25,5 @@
 #    Time: 0 ps  Iteration: 0  Instance: /core_tb/uut/_instruction_memory
 # ** Note: $finish    : core_tb.sv(25)
 #    Time: 310 ps  Iteration: 0  Instance: /core_tb
-# End time: 18:39:21 on Mar 22,2025, Elapsed time: 0:00:01
+# End time: 18:51:06 on Mar 22,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 1
