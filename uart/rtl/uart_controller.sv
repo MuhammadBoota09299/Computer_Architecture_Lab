@@ -100,7 +100,7 @@ always_comb begin
             end
             else if (rx_bit_count && parity_en) begin
                 rx_next_state=PARITY;
-                recieve_parity=rx_bit;
+                receive_parity=rx_bit;
                 rx_fifo_wr_en=1'b1;
             end
             else if ( rx_bit_count && (~parity) && (~stop_bit)) begin

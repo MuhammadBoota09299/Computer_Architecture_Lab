@@ -26,7 +26,12 @@ module bit_count_reg (
                 tx_bit_count <= 1'b0;
             end
         end
+        else begin
+            tx_bit_count <= 1'b0;
+            tx_bit_co <= 4'b0;  
     end
+    end
+
 
     always_ff @(posedge clock) begin 
         if (reset) begin
@@ -43,5 +48,10 @@ module bit_count_reg (
                 rx_bit_count <= 1'b0;
             end
         end
+        else begin
+            rx_bit_count <= 1'b0;
+            rx_bit_co <= 4'b0;  
     end
+    end
+
 endmodule
