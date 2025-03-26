@@ -1,6 +1,5 @@
 module bit_count_reg (
-    input logic clock, reset, tx_bit_count_reg_en, rx_bit_count_reg_en,  // Fixed typo: clcok -> clock
-    input logic [1:0] no_of_bits,
+    input logic clock, reset, tx_bit_count_reg_en, rx_bit_count_reg_en,
     output logic tx_bit_count, rx_bit_count
 );
     logic [3:0] tx_bit_co = 4'b0;  // Combined declaration and initialization
@@ -18,7 +17,7 @@ module bit_count_reg (
             tx_bit_co <= 4'b0;
         end
         else if (tx_bit_count_reg_en) begin
-            if (tx_bit_co == (no_of_bits + 4'h4)) begin  
+            if (tx_bit_co == 4'h8) begin  
                 tx_bit_count <= 1'b1;
                 tx_bit_co <= 4'b0;  
             end
@@ -35,7 +34,7 @@ module bit_count_reg (
             rx_bit_co <= 4'b0;
         end
         else if (rx_bit_count_reg_en) begin
-            if (rx_bit_co == (no_of_bits + 4'h4)) begin
+            if (rx_bit_co == 4'h8) begin
                 rx_bit_count <= 1'b1;
                 rx_bit_co <= 4'b0;  
             end
