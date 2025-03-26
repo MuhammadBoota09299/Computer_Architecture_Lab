@@ -476,7 +476,7 @@
             <mxPoint x="1020" y="570" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="o6b-7TuuPEHLtJqzvapH-169" value="recieve_parity" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];rotation=90;labelBackgroundColor=none;fontStyle=0" parent="o6b-7TuuPEHLtJqzvapH-166" vertex="1" connectable="0">
+        <mxCell id="o6b-7TuuPEHLtJqzvapH-169" value="receive_parity" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];rotation=90;labelBackgroundColor=none;fontStyle=0" parent="o6b-7TuuPEHLtJqzvapH-166" vertex="1" connectable="0">
           <mxGeometry x="-0.7995" y="-1" relative="1" as="geometry">
             <mxPoint x="-13" y="-4" as="offset" />
           </mxGeometry>
@@ -924,7 +924,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="6QUIF64mlT7Sfv4h3NJ3-4" value="rx_bit_count&#xa;rx_baud_rate&#xa;parity&#xa;---------------------------&#xa;rx_baud_rate_reg_en&#xa;~rx_bit_count_reg_en&#xa;~rx_shift_reg_en&#xa;~status_register_en&#xa;recieve_parity=rx&#xa;rx_fifo_wr_en" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;" parent="nsiUKzhZOgeZwoa8xhAe-12" vertex="1" connectable="0">
+        <mxCell id="6QUIF64mlT7Sfv4h3NJ3-4" value="rx_bit_count&#xa;rx_baud_rate&#xa;parity&#xa;---------------------------&#xa;rx_baud_rate_reg_en&#xa;~rx_bit_count_reg_en&#xa;~rx_shift_reg_en&#xa;~status_register_en&#xa;receive_parity=rx&#xa;rx_fifo_wr_en" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;" parent="nsiUKzhZOgeZwoa8xhAe-12" vertex="1" connectable="0">
           <mxGeometry x="0.3299" y="-24" relative="1" as="geometry">
             <mxPoint x="-51" y="22" as="offset" />
           </mxGeometry>

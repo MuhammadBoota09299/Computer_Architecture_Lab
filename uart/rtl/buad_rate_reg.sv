@@ -37,7 +37,11 @@ else if (rx_baud_rate_reg_en) begin
         rx_baud_rate <= 1'b0;
     end
 end
-
+end
+else begin
+        rx_baud_rate_count<=16'b0;
+        sample<=1'b0;
+        rx_baud_rate <= 1'b0;
 end
 end
 
@@ -56,6 +60,10 @@ else if (tx_baud_rate_reg_en) begin
     end
 end
 
+end
+else begin
+        tx_baud_rate_count<=16'b0;
+        tx_baud_rate <= 1'b0;
 end
 end  
 endmodule

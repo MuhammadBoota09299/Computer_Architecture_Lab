@@ -8,9 +8,11 @@ module lsu (
         uart_sel=1'b0;
         mem_en=1'b0;
         if(alu_mem[27:0]==UART_BASE_ADDRESS)begin
-            uart_sel=mem_wr_mem;
+            uart_sel=1'b1;
+            uart_wr_enable=mem_wr_mem;
         end
         else begin
+            uart_sel=1'b0;
             mem_en=mem_wr_mem;
         end
     end
