@@ -1,4 +1,3 @@
-// includes/packages.sv
 package packages;
     typedef enum logic [6:0] {
         R_TYPE = 7'b0110011,
@@ -44,4 +43,15 @@ package packages;
         LBU   = 3'b100,
         LHU   = 3'b101
     } load_store;
+
+    // Base address (configurable)
+    parameter UART_BASE_ADDRESS = 28'h20;
+    // Register address mapping using enum
+    typedef enum logic [3:0] {
+        STATUS_REG = 4'h0,
+        DATA_REG   = 4'h4,
+        CTRL_REG   = 4'h8,
+        BAUD_REG   = 4'hC
+    } uart_reg_address_t;
+
 endpackage
