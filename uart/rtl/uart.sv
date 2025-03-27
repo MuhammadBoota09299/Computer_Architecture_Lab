@@ -7,7 +7,7 @@ module uart (
 );
 
 logic [7:0]tx_fifo_data,rx_fifo_data,tx_data,rx_data;
-logic parity_enableable,stop_bit,parity,tx_fifo_full,tx_parity_add,rx_parity_add,tx_shift_reg_en,rx_fifo_rd_en,parity_error,uart_en,tx_fifo_rd_en;
+logic parity_enable,stop_bit,parity,tx_fifo_full,tx_parity_add,rx_parity_add,tx_shift_reg_en,rx_fifo_rd_en,parity_error,uart_en,tx_fifo_rd_en;
 logic tx_fifo_wr_en,stop_bit_error,rx_fifo_empty,rx_fifo_full,busy,rx_en,tx_en,rx_baud_rate_reg_en,tx_fifo_empty,tx_baud_rate_reg_en;
 logic bit_count,rx_baud_rate,tx_baud_rate,tx_shift_en,tx_bit_count_reg_en,rx_shift_reg_en,rx_bit_count_reg_en,tx_bit_count;
 logic rx_bit_count,rx_fifo_wr_en,status_reg_en,receive_parity;

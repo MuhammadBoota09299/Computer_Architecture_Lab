@@ -1,4 +1,4 @@
-import packages;
+import packages ::*;
 module uart_registerfile (
     // signals from and to processor
     input logic clock,reset,uart_wr_enable,uart_sel,
@@ -31,7 +31,7 @@ always_comb begin
         rx_fifo_empty,   // Bit 3: RX FIFO empty
         parity_error,    // Bit 2: Parity error
         stop_bit_error,  // Bit 1: Stop bit error
-        busy,            // Bit 0: UART busy
+        busy             // Bit 0: UART busy
     };
 end
 
@@ -54,7 +54,6 @@ always_ff @(negedge clock ) begin
         uart_data_reg<=8'b0;
         uart_baud_rate_reg<=16'b0;
         uart_data_reg<=8'b0;
-        uart_data<=8'b0;
         tx_fifo_wr_en<=1'b0;
     end
     else if (uart_wr_enable) begin
@@ -78,19 +77,19 @@ end
 always_comb begin 
     case (uart_addr)
     STATUS_REG :begin
-        uart_data={28'b0:uart_status_reg};
+        uart_data={28'b0,uart_status_reg};
         rx_fifo_rd_en=1'b0;
     end
     DATA_REG   :begin
-        uart_data={28'b0:rx_data};
+        uart_data={28'b0,rx_data};
         if (uart_sel) rx_fifo_rd_en=1'b1;
     end
     CTRL_REG   :begin
-        uart_data={28'b0:uart_ctrl_reg};
+        uart_data={28'b0,uart_ctrl_reg};
         rx_fifo_rd_en=1'b0;
     end
-    BAUD_REG   = begin
-        uart_data={28'b0:uart_baud_rate_reg};
+    BAUD_REG   :begin
+        uart_data={28'b0,uart_baud_rate_reg};
         rx_fifo_rd_en=1'b0;
     end
         default: rx_fifo_rd_en=1'b0;

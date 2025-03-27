@@ -58,7 +58,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="nmXEE6ZkfctVZ-WLgOEb-17" value="parity_enableable" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="nmXEE6ZkfctVZ-WLgOEb-17" value="parity_enable" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="340" y="230" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="nmXEE6ZkfctVZ-WLgOEb-18" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;startSize=6;opacity=70;jumpSize=1;strokeColor=default;shadow=1;entryX=0.063;entryY=1.021;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.103;exitY=-0.056;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="nmXEE6ZkfctVZ-WLgOEb-7" target="nmXEE6ZkfctVZ-WLgOEb-10" edge="1">
@@ -377,7 +377,7 @@
         <mxCell id="nmXEE6ZkfctVZ-WLgOEb-99" value="reset" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="190" y="575" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="nmXEE6ZkfctVZ-WLgOEb-100" value="party_add" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="nmXEE6ZkfctVZ-WLgOEb-100" value="parity_add" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="680" y="120" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="nmXEE6ZkfctVZ-WLgOEb-101" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
@@ -684,7 +684,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="sB1i_qbXA5aM1ei3woNL-1" value="parity_enableable&lt;br&gt;bit_count&lt;br&gt;baud_en&lt;br&gt;_________&lt;div&gt;parity_bit_enable|&lt;br&gt;baud_rate_reg_en&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="sB1i_qbXA5aM1ei3woNL-1" value="parity_enable&lt;br&gt;bit_count&lt;br&gt;baud_en&lt;br&gt;_________&lt;div&gt;parity_bit_enable|&lt;br&gt;baud_rate_reg_en&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-40" y="830" width="130" height="90" as="geometry" />
         </mxCell>
         <mxCell id="QUGP9xHU8JDsyiN5SYcx-1" value="" style="group" parent="1" vertex="1" connectable="0">
