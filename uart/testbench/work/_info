@@ -1,0 +1,244 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/aziz/Documents/Computer_Architecture_Lab/uart/testbench
+vbaud_rate_reg
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 !s110 1743042829
+!i10b 1
+!s100 b69f0c47MKm`_VBYkI:WP1
+Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I?WE:Z38Pda9M?dNZAODkT0
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1743040244
+8../rtl/buad_rate_reg.sv
+F../rtl/buad_rate_reg.sv
+!i122 0
+L0 1 68
+Z5 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z6 !s108 1743042829.000000
+!s107 uart_tb.sv|../rtl/uart_registerfile.sv|../rtl/uart_controller.sv|../rtl/uart.sv|../rtl/tx_shift_reg.sv|../rtl/tx_fifo.sv|../rtl/rx_shift_reg.sv|../rtl/rx_fifo.sv|../rtl/parity_calculate.sv|../rtl/buad_rate_reg.sv|../rtl/bit_count_reg.sv|/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv|
+Z7 !s90 -sv|+incdir+../core/rtl/defines|/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv|../rtl/bit_count_reg.sv|../rtl/buad_rate_reg.sv|../rtl/parity_calculate.sv|../rtl/rx_fifo.sv|../rtl/rx_shift_reg.sv|../rtl/tx_fifo.sv|../rtl/tx_shift_reg.sv|../rtl/uart.sv|../rtl/uart_controller.sv|../rtl/uart_registerfile.sv|uart_tb.sv|
+!i113 1
+o-sv
+Z8 !s92 -sv +incdir+../core/rtl/defines
+Z9 tCvgOpt 0
+vbit_count_reg
+R1
+R2
+!i10b 1
+!s100 =XTL[H3>z:mJW5a:RdTW53
+R3
+IR<ZzC4Pi;>nb5jB9]mFPo3
+R4
+S1
+R0
+Z10 w1743038571
+8../rtl/bit_count_reg.sv
+F../rtl/bit_count_reg.sv
+!i122 0
+L0 1 57
+R5
+r1
+!s85 0
+31
+R6
+Z11 !s107 uart_tb.sv|../rtl/uart_registerfile.sv|../rtl/uart_controller.sv|../rtl/uart.sv|../rtl/tx_shift_reg.sv|../rtl/tx_fifo.sv|../rtl/rx_shift_reg.sv|../rtl/rx_fifo.sv|../rtl/parity_calculate.sv|../rtl/buad_rate_reg.sv|../rtl/bit_count_reg.sv|/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv|
+R7
+!i113 1
+o-sv
+R8
+R9
+Xpackages
+R1
+R2
+!i10b 1
+!s100 khM1iPV]NIb6LebmJCk7l1
+R3
+IHizW15VNnPP9NUn6ihIah1
+VHizW15VNnPP9NUn6ihIah1
+S1
+R0
+R10
+8/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv
+F/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv
+!i122 0
+L0 1 0
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9
+vparity_calculate
+R1
+R2
+!i10b 1
+!s100 ;LEifiKdh[o6R=eebCoeK0
+R3
+IJiB4U>472n5PN^<m?eY3J1
+R4
+S1
+R0
+Z12 w1743042089
+8../rtl/parity_calculate.sv
+F../rtl/parity_calculate.sv
+!i122 0
+L0 1 11
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9
+vrx_fifo
+R1
+R2
+!i10b 1
+!s100 <7F02M[nRQXG@DQ@hSl6_3
+R3
+II]JQ?olHa[LK2`G]DNOAd3
+R4
+S1
+R0
+R10
+8../rtl/rx_fifo.sv
+F../rtl/rx_fifo.sv
+!i122 0
+Z13 L0 1 35
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9
+vrx_shift_reg
+R1
+R2
+!i10b 1
+!s100 L6[Mz?gReSaz=[YaH7;8z1
+R3
+IUaN^@O]H6gJb8e`=;=04z1
+R4
+S1
+R0
+R10
+8../rtl/rx_shift_reg.sv
+F../rtl/rx_shift_reg.sv
+!i122 0
+L0 1 16
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9
+vtx_fifo
+R1
+R2
+!i10b 1
+!s100 J8mB_RM9ab99`mi8h_Iz_1
+R3
+IEDkC:[e>>jnAaQd@1D;Lj3
+R4
+S1
+R0
+R10
+8../rtl/tx_fifo.sv
+F../rtl/tx_fifo.sv
+!i122 0
+R13
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9
+vtx_shift_reg
+R1
+R2
+!i10b 1
+!s100 1EKF]o=4AbK3e`ACOzZJZ3
+R3
+IUYzZo]kLiJaCUD:jXHao>0
+R4
+S1
+R0
+R12
+8../rtl/tx_shift_reg.sv
+F../rtl/tx_shift_reg.sv
+!i122 0
+L0 1 28
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9
+vuart
+R1
+R2
+!i10b 1
+!s100 glCTQ8bZ1]HdY@S0o]_hi2
+R3
+IUHEMJ<nA?ZT`lgd3L6[jF3
+R4
+S1
+R0
+R12
+8../rtl/uart.sv
+F../rtl/uart.sv
+!i122 0
+L0 1 53
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9

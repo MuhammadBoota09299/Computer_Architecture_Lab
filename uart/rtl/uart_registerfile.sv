@@ -13,7 +13,7 @@ module uart_registerfile (
     input logic [7:0]rx_data, //to data register
     output logic [7:0] tx_fifo_data, //from data register
 
-    output logic parity_en,parity,stop_bit,uart_en,tx_en,rx_en,  //from uart CTRL register
+    output logic parity_enable,parity,stop_bit,uart_en,tx_en,rx_en,  //from uart CTRL register
     
     output logic [15:0]baud_rate  // from uart baud register
 );
@@ -36,7 +36,7 @@ always_comb begin
 end
 
 // Control register 
-assign parity_en = uart_ctrl_reg[7];  // Bit 7 = parity enable
+assign parity_enable = uart_ctrl_reg[7];  // Bit 7 = parity enable
 assign parity    = uart_ctrl_reg[6];  // Bit 6 = parity type (0=even, 1=odd)
 assign stop_bit  = uart_ctrl_reg[5];  // Bit 5 = stop bit (0=1-bit, 1=2-bit)
 assign uart_en   = uart_ctrl_reg[4];  // Bit 4 = UART enable

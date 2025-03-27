@@ -1,43 +1,45 @@
 module uart_controller (
-    input logic clock,reset,stop_bit,parity_enable,uart_en,busy,
+    input logic clock,reset,stop_bit,parity_enable,uart_en,busy,parity,
 
    //transmiter
-   input logic tx_en,tx_empty,tx_baud_rate,tx_bit_count,
-   output logic tx_baud_rate_reg_en,tx_bit_count_reg_en,tx_shift_register_en,tx_shift_en,tx_fifo_rd_en
+   input logic tx_en,tx_fifo_empty,tx_baud_rate,tx_bit_count,
+   output logic tx_baud_rate_reg_en,tx_bit_count_reg_en,tx_shift_reg_en,tx_shift_en,
+   output logic tx_fifo_rd_en,
 
    //receiver
-   input logic rx_en,rx_baud_rate,rx_bit_count,rx_bit,
-   output logic rx_baud_rate_reg_en,rx_bit_count_reg_en,rx_shift_reg_en,receive_partiy,stop_bit_error,rx_fifo_wr_en,shift_status_en
+   input logic rx_en,rx_baud_rate,rx_bit_count,rx_bit,rx_fifo_full,
+   output logic rx_baud_rate_reg_en,rx_bit_count_reg_en,rx_shift_reg_en,receive_parity,
+   output logic stop_bit_error,rx_fifo_wr_en,shift_status_en,status_register_en
 );
 
 typedef enum logic [2:0] {
-    IDLE,
-    LOAD,
-    RECEIVE,
-    START_BIT,
-    DATA_BITS,
-    PARITY,
-    STOP_BIT
+    RX_IDLE,
+    RX_LOAD,
+    RX_RECEIVE,
+    RX_START_BIT,
+    RX_DATA_BITS,
+    RX_PARITY,
+    RX_STOP_BIT
 } receiver_states;
 
 typedef enum logic [2:0] {
-    IDLE,
-    LOAD,
-    TRANSMIT,
-    START_BIT,
-    DATA_BITS,
-    PARITY,
-    STOP_BIT
+    TX_IDLE,
+    TX_LOAD,
+    TX_TRANSMIT,
+    TX_START_BIT,
+    TX_DATA_BITS,
+    TX_PARITY,
+    TX_STOP_BIT
 } transmiter_states;
 
 
 
 // for receiver
-receiver_states_t rx_current_state, rx_next_state;
+logic [2:0] rx_current_state, rx_next_state;
 
 always_ff @( posedge clock ) begin 
     if (reset) begin
-        rx_current_state<=IDLE;
+        rx_current_state<=RX_IDLE;
     end
     else begin
         rx_current_state <=rx_next_state;
@@ -53,91 +55,91 @@ always_comb begin
     rx_fifo_wr_en=1'b0;
     busy=1'b0;
     case (rx_current_state)
-        IDLE:if (uart_en) rx_next_state=LOAD; else rx_next_state=IDLE;
-        LOAD:begin
-            if (rx_en && ~rx_fifo_fiful && ~rx_bit) begin
-                rx_next_state=RECEIVE;
+        RX_IDLE:if (uart_en) rx_next_state=RX_LOAD; else rx_next_state=RX_IDLE;
+        RX_LOAD:begin
+            if (rx_en && ~rx_fifo_full && ~rx_bit) begin
+                rx_next_state=RX_RECEIVE;
                 rx_baud_rate_reg_en=1'b1;
                 busy=1'b1;
             end
             else if (!uart_en) begin
-                rx_next_state=IDLE;
+                rx_next_state=RX_IDLE;
             end
             else begin
-                rx_next_state=LOAD;
+                rx_next_state=RX_LOAD;
             end
         end
-        RECEIVE:begin
+        RX_RECEIVE:begin
             rx_baud_rate_reg_en=1'b1;
             busy=1'b1;
-            if ( rx_baurd_rate) rx_next_state=START_BIT; else rx_next_state=RECEIVE;
+            if ( rx_baud_rate) rx_next_state=RX_START_BIT; else rx_next_state=RX_RECEIVE;
         end
-        START_BIT:begin
+        RX_START_BIT:begin
             rx_baud_rate_reg_en=1'b1;
             busy=1'b1;
             if (rx_baud_rate)begin
-                rx_next_state=DATA_BITS;
+                rx_next_state=RX_DATA_BITS;
                 rx_bit_count_reg_en=1'b1;
                 rx_shift_reg_en=1'b1;
             end
             else begin
-                rx_next_state=START_BIT;
+                rx_next_state=RX_START_BIT;
             end
 
         end
-        DATA_BITS: begin
+        RX_DATA_BITS: begin
             busy=1'b1;
             rx_baud_rate_reg_en=1'b1;
             if (rx_baud_rate) begin
-                rx_next_state=DATA_BITS;
+                rx_next_state=RX_DATA_BITS;
                 rx_bit_count_reg_en=1'b1;
                 rx_shift_reg_en=1'b1;
             end
-            else if (rx_bit_count && (~parity_en) && stop_bit) begin
-                rx_next_state=STOP_BIT;
+            else if (rx_bit_count && (~parity_enable) && stop_bit) begin
+                rx_next_state=RX_STOP_BIT;
                 stop_bit_error = (rx_bit==1);
                 rx_fifo_wr_en = 1'b1;
             end
-            else if (rx_bit_count && parity_en) begin
-                rx_next_state=PARITY;
+            else if (rx_bit_count && parity_enable) begin
+                rx_next_state=RX_PARITY;
                 receive_parity=rx_bit;
                 rx_fifo_wr_en=1'b1;
             end
             else if ( rx_bit_count && (~parity) && (~stop_bit)) begin
-                rx_next_state=LOAD;
+                rx_next_state=RX_LOAD;
                 status_register_en=1'b1;
                 stop_bit_error = (rx_bit==1);
                 busy=1'b0;
                 rx_baud_rate_reg_en=1'b0;
             end
             else begin
-                rx_next_state=DATA_BITS;
+                rx_next_state=RX_DATA_BITS;
             end
         end
-        PARITY:begin
+        RX_PARITY:begin
             rx_baud_rate_reg_en=1'b1;
             if (rx_baud_rate && stop_bit) begin
-                rx_next_state=STOP_BIT;
+                rx_next_state=RX_STOP_BIT;
                 stop_bit_error = (rx_bit==1);
             end
             else if (rx_baud_rate && ~stop_bit) begin
-                rx_next_state=LOAD;
+                rx_next_state=RX_LOAD;
                 status_register_en=1'b1;
                 stop_bit_error = (rx_bit==1);
                 rx_baud_rate_reg_en=1'b0;  
             end
             else begin
-                rx_next_state=PARITY;
+                rx_next_state=RX_PARITY;
             end
         end
-        STOP_BIT:begin
+        RX_STOP_BIT:begin
             if (rx_baud_rate) begin
-                rx_next_state=LOAD;
+                rx_next_state=RX_LOAD;
                 status_register_en=1'b1;
                 stop_bit_error=(rx_bit==1) || stop_bit_error;
             end
             else begin
-                rx_next_state=STOP_BIT;
+                rx_next_state=RX_STOP_BIT;
             end
         end
 
@@ -148,11 +150,11 @@ end
 
 
 // for transmiter
-transmiter_states_t tx_current_state, tx_next_state;
+logic [2:0] tx_current_state, tx_next_state;
 
 always_ff @( posedge clock ) begin 
     if (reset) begin
-        tx_current_state<=IDLE;
+        tx_current_state<=TX_IDLE;
     end
     else begin
         tx_current_state <=tx_next_state;
@@ -168,93 +170,93 @@ always_comb begin
     tx_fifo_rd_en=1'b0;
     busy=1'b0;
     case (tx_current_state)
-        IDLE:if (uart_en) tx_next_state=LOAD; else tx_next_state=IDLE;
-        LOAD:begin
-            if (tx_en && ~rx_fifo_empty) begin
-                tx_next_state=TRANSMIT;
+        TX_IDLE:if (uart_en) tx_next_state=TX_LOAD; else tx_next_state=TX_IDLE;
+        TX_LOAD:begin
+            if (tx_en && ~tx_fifo_empty) begin
+                tx_next_state=TX_TRANSMIT;
                 tx_baud_rate_reg_en=1'b1;
                 tx_shift_reg_en=1'b1;
                 tx_fifo_rd_en=1'b1;
                 busy=1'b1;
             end
             else if (!uart_en) begin
-                tx_next_state=IDLE;
+                tx_next_state=TX_IDLE;
             end
             else begin
-                tx_next_state=LOAD;
+                tx_next_state=TX_LOAD;
             end
         end
-        TRANSMIT:begin
+        TX_TRANSMIT:begin
             tx_baud_rate_reg_en=1'b1;
             busy=1'b1;
-            if ( tx_baurd_rate)begin
-                 tx_next_state=START_BIT;
+            if ( rx_baud_rate)begin
+                 tx_next_state=TX_START_BIT;
                  tx_shift_en=1'b1;
             end
-                else tx_next_state=TRANSMIT;
+                else tx_next_state=TX_TRANSMIT;
         end
-        START_BIT:begin
+        TX_START_BIT:begin
             tx_baud_rate_reg_en=1'b1;
             busy=1'b1;
             if (tx_baud_rate)begin
-                tx_next_state=DATA_BITS;
+                tx_next_state=TX_DATA_BITS;
                 tx_bit_count_reg_en=1'b1;
                 tx_shift_en=1'b1;
             end
             else begin
-                tx_next_state=START_BIT;
+                tx_next_state=TX_START_BIT;
             end
 
         end
-        DATA_BITS: begin
+        TX_DATA_BITS: begin
             busy=1'b1;
             tx_baud_rate_reg_en=1'b1;
             if (tx_baud_rate) begin
-                tx_next_state=DATA_BITS;
+                tx_next_state=TX_DATA_BITS;
                 tx_bit_count_reg_en=1'b1;
                 tx_shift_en=1'b1;
             end
-            else if (tx_bit_count && (~parity_en) && stop_bit) begin
-                tx_next_state=STOP_BIT;
+            else if (tx_bit_count && (~parity_enable) && stop_bit) begin
+                tx_next_state=TX_STOP_BIT;
                 tx_shift_en=1'b1;
             end
-            else if (tx_bit_count && parity_en) begin
-                tx_next_state=PARITY;
+            else if (tx_bit_count && parity_enable) begin
+                tx_next_state=TX_PARITY;
                 tx_shift_en=1'b1;
             end
-            else if ( tx_bit_count && (~parity) && (~stop_bit) && (rx_fifo_empty)) begin
-                tx_next_state=LOAD;
+            else if ( tx_bit_count && (~parity) && (~stop_bit) && (tx_fifo_empty)) begin
+                tx_next_state=TX_LOAD;
                 tx_shift_en=1'b1;
                 busy=1'b0;
                 tx_baud_rate_reg_en=1'b0;
             end
             else begin
-                tx_next_state=DATA_BITS;
+                tx_next_state=TX_DATA_BITS;
             end
         end
-        PARITY:begin
+        TX_PARITY:begin
             tx_baud_rate_reg_en=1'b1;
             if (tx_baud_rate && stop_bit) begin
-                tx_next_state=STOP_BIT;
+                tx_next_state=TX_STOP_BIT;
                 tx_shift_en=1'b1;
             end
-            else if (tx_baud_rate && ~stop_bit && (rx_fifo_empty)) begin
-                tx_next_state=LOAD;
+            else if (tx_baud_rate && ~stop_bit && (tx_fifo_empty)) begin
+                tx_next_state=TX_LOAD;
                 tx_baud_rate_reg_en=1'b0;
                 tx_shift_en=1'b1;  
             end
 
             else begin
-                tx_next_state=PARITY;
+                tx_next_state=TX_PARITY;
             end
         end
-        STOP_BIT:begin
+        TX_STOP_BIT:begin
             if (tx_baud_rate) begin
-                rx_next_state=LOAD;
+                rx_next_state=TX_LOAD;
                 tx_shift_en=1'b1;
             end
             else begin
-                rx_next_state=STOP_BIT;
+                rx_next_state=TX_STOP_BIT;
             end
         end
         default: tx_next_state=tx_current_state;

@@ -58,7 +58,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="nmXEE6ZkfctVZ-WLgOEb-17" value="parity_enable" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="nmXEE6ZkfctVZ-WLgOEb-17" value="parity_enableable" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="340" y="230" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="nmXEE6ZkfctVZ-WLgOEb-18" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;startSize=6;opacity=70;jumpSize=1;strokeColor=default;shadow=1;entryX=0.063;entryY=1.021;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.103;exitY=-0.056;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="nmXEE6ZkfctVZ-WLgOEb-7" target="nmXEE6ZkfctVZ-WLgOEb-10">

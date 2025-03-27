@@ -23,4 +23,10 @@ initial begin
     
 
 end
+
+    // Dump waveforms
+    initial begin
+        $dumpfile("waveform.vcd");
+        $dumpvars(0, uart_tb);
+    end
 endmodule
