@@ -12,7 +12,7 @@ always_comb begin
     rx_baud_rate_count_updated=rx_baud_rate_count+1;
 
     if (sample) begin
-       rx_baud_rate_updated=baud_rate 
+       rx_baud_rate_updated=baud_rate; 
     end
     else begin
        rx_baud_rate_updated=baud_rate>>1'b1; // for sampling at middle
@@ -25,6 +25,7 @@ if (reset) begin
     sample<=1'b0;
     rx_baud_rate_count<=16'b0;
     rx_baud_rate <= 1'b0;
+end
 else if (rx_baud_rate_reg_en) begin
     if (rx_baud_rate_updated==rx_baud_rate_count)begin
         rx_baud_rate_count<=1'b0;
@@ -37,7 +38,6 @@ else if (rx_baud_rate_reg_en) begin
         rx_baud_rate <= 1'b0;
     end
 end
-end
 else begin
         rx_baud_rate_count<=16'b0;
         sample<=1'b0;
@@ -49,6 +49,7 @@ always_ff @(posedge clock ) begin
 if (reset) begin
     tx_baud_rate_count<=16'b0;
     tx_baud_rate <= 1'b0;
+end
 else if (tx_baud_rate_reg_en) begin
     if (baud_rate==tx_baud_rate_count)begin
         tx_baud_rate_count<=1'b0;
@@ -58,8 +59,6 @@ else if (tx_baud_rate_reg_en) begin
         tx_baud_rate_count<=tx_baud_rate_count_updated;
         tx_baud_rate <= 1'b0;
     end
-end
-
 end
 else begin
         tx_baud_rate_count<=16'b0;
