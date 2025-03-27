@@ -1,0 +1,23 @@
+# vsim -c -do "run -all; quit" uart_tb 
+# Start time: 08:24:27 on Mar 27,2025
+# Loading sv_std.std
+# Loading work.uart_tb
+# Loading work.uart
+# Loading work.bit_count_reg
+# Loading work.baud_rate_reg
+# Loading work.parity_calculate
+# Loading work.rx_fifo
+# Loading work.rx_shift_reg
+# Loading work.tx_shift_reg
+# Loading work.tx_fifo
+# Loading work.uart_controller
+# Loading work.packages
+# Loading work.uart_registerfile_sv_unit
+# Loading work.uart_registerfile
+# run -all
+# [155] Write Addr: 0x3, Data: 0x00000057
+# [265] Write Addr: 0x1, Data: 0x00000041
+# ** Note: $finish    : uart_tb.sv(57)
+#    Time: 10270 ps  Iteration: 0  Instance: /uart_tb
+# End time: 08:24:27 on Mar 27,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0

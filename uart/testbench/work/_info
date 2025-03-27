@@ -1,6 +1,7 @@
 m255
 K4
 z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
 13
 !s112 1.1
 !i10d 8192
@@ -10,7 +11,7 @@ cModel Technology
 Z0 d/home/aziz/Documents/Computer_Architecture_Lab/uart/testbench
 vbaud_rate_reg
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1743042829
+Z2 !s110 1743045867
 !i10b 1
 !s100 b69f0c47MKm`_VBYkI:WP1
 Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -27,7 +28,7 @@ Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1743042829.000000
+Z6 !s108 1743045867.000000
 !s107 uart_tb.sv|../rtl/uart_registerfile.sv|../rtl/uart_controller.sv|../rtl/uart.sv|../rtl/tx_shift_reg.sv|../rtl/tx_fifo.sv|../rtl/rx_shift_reg.sv|../rtl/rx_fifo.sv|../rtl/parity_calculate.sv|../rtl/buad_rate_reg.sv|../rtl/bit_count_reg.sv|/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv|
 Z7 !s90 -sv|+incdir+../core/rtl/defines|/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv|../rtl/bit_count_reg.sv|../rtl/buad_rate_reg.sv|../rtl/parity_calculate.sv|../rtl/rx_fifo.sv|../rtl/rx_shift_reg.sv|../rtl/tx_fifo.sv|../rtl/tx_shift_reg.sv|../rtl/uart.sv|../rtl/uart_controller.sv|../rtl/uart_registerfile.sv|uart_tb.sv|
 !i113 1
@@ -74,7 +75,7 @@ R10
 8/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv
 F/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv
 !i122 0
-L0 1 0
+Z12 L0 1 0
 R5
 r1
 !s85 0
@@ -90,13 +91,13 @@ vparity_calculate
 R1
 R2
 !i10b 1
-!s100 ;LEifiKdh[o6R=eebCoeK0
+!s100 O;e=RjLJd2EP;Eh9[1Fke1
 R3
-IJiB4U>472n5PN^<m?eY3J1
+I[8iiiJ62BkLoLd@<X=U:U3
 R4
 S1
 R0
-Z12 w1743042089
+Z13 w1743045474
 8../rtl/parity_calculate.sv
 F../rtl/parity_calculate.sv
 !i122 0
@@ -126,7 +127,7 @@ R10
 8../rtl/rx_fifo.sv
 F../rtl/rx_fifo.sv
 !i122 0
-Z13 L0 1 35
+Z14 L0 1 35
 R5
 r1
 !s85 0
@@ -178,7 +179,7 @@ R10
 8../rtl/tx_fifo.sv
 F../rtl/tx_fifo.sv
 !i122 0
-R13
+R14
 R5
 r1
 !s85 0
@@ -200,7 +201,7 @@ IUYzZo]kLiJaCUD:jXHao>0
 R4
 S1
 R0
-R12
+w1743042089
 8../rtl/tx_shift_reg.sv
 F../rtl/tx_shift_reg.sv
 !i122 0
@@ -220,17 +221,124 @@ vuart
 R1
 R2
 !i10b 1
-!s100 glCTQ8bZ1]HdY@S0o]_hi2
+!s100 `A2X6^<aAaVl2YL0>M0z62
 R3
-IUHEMJ<nA?ZT`lgd3L6[jF3
+IdOH_gz`Jz1_FebdWd80?k2
 R4
 S1
 R0
-R12
+R13
 8../rtl/uart.sv
 F../rtl/uart.sv
 !i122 0
 L0 1 53
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9
+vuart_controller
+R1
+R2
+!i10b 1
+!s100 4BD:01og0`43A9_SeVWLC3
+R3
+IS>;3ZNHi8fhbDVPV48n<X0
+R4
+S1
+R0
+w1743045859
+8../rtl/uart_controller.sv
+F../rtl/uart_controller.sv
+!i122 0
+L0 1 272
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9
+vuart_registerfile
+R1
+Z15 DXx4 work 8 packages 0 22 HizW15VNnPP9NUn6ihIah1
+DXx4 work 25 uart_registerfile_sv_unit 0 22 `:@BUIm80QoZ_zh4?FLBe3
+R2
+R4
+r1
+!s85 0
+!i10b 1
+!s100 U[FWaXP^]>W8X3JbZkOBJ1
+Im1m<MJAb3;moWn8]obl?S1
+!s105 uart_registerfile_sv_unit
+S1
+R0
+Z16 w1743045076
+Z17 8../rtl/uart_registerfile.sv
+Z18 F../rtl/uart_registerfile.sv
+!i122 0
+L0 2 97
+R5
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9
+Xuart_registerfile_sv_unit
+R1
+R15
+R2
+V`:@BUIm80QoZ_zh4?FLBe3
+r1
+!s85 0
+!i10b 1
+!s100 2UmlhiQfn[KQaQckI_lIF2
+I`:@BUIm80QoZ_zh4?FLBe3
+!i103 1
+S1
+R0
+R16
+R17
+R18
+!i122 0
+R12
+R5
+31
+R6
+R11
+R7
+!i113 1
+o-sv
+R8
+R9
+vuart_tb
+R1
+R2
+!i10b 1
+!s100 =:giHERGii:Yk7MJH7VHf3
+R3
+IS5N=M^G5>^aNc=jOEEjbQ0
+R4
+S1
+R0
+w1743045220
+8uart_tb.sv
+Fuart_tb.sv
+!i122 0
+L0 1 75
 R5
 r1
 !s85 0
