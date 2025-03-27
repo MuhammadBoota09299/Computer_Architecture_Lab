@@ -19,41 +19,49 @@ module uart_tb ();
     initial begin
         // Initialize signals
         reset = 1'b1;
-        rx_bit = 1'b1;          // Idle state
         uart_wr_enable = 1'b0;
         uart_sel = 1'b0;
         uart_addr = 4'b0;
         wdata_mem = 32'b0;
-        
+        #20;
         // Release reset after 10 clock cycles
-        #50 reset = 1'b0;
+        @(posedge clock );
+        reset = 1'b0;
         
-        // Test sequence
-        // 1. Configure baud rate (example for 115200 baud)
-        #100;
-        uart_addr = 4'h3;       // BAUD_REG address
-        wdata_mem = 32'd87;     // Example divisor for 115200 baud @ 100MHz
+
+         @(posedge clock );
+        uart_addr = 4'hC;       //
+        wdata_mem = 32'd103;     // 
         uart_wr_enable = 1'b1;
-        #10;
+         @(posedge clock );
         uart_wr_enable = 1'b0;
         
-        // 2. Send a character (example: 'A' - 0x41)
-        #100;
-        uart_addr = 4'h1;       // DATA_REG address
-        wdata_mem = 32'h41;
+        
+         @(posedge clock );
+        uart_addr = 4'h8;       // DATA_REG address
+        wdata_mem = 32'h31;
         uart_wr_enable = 1'b1;
-        #10;
+         @(posedge clock );
         uart_wr_enable = 1'b0;
         
-        // 3. Monitor RX line (optional - you would need to drive rx_bit)
-        // #1000;
-        // rx_bit = 1'b0; // Start bit
-        // #8680;         // Bit duration for 115200 baud
-        // rx_bit = 1'b1; // Bit 0
-        // ... (continue for all data bits)
+         @(posedge clock );
+        uart_addr = 4'h4;       // DATA_REG address
+        wdata_mem = 32'hD;
+        uart_wr_enable = 1'b1;
+
+        @(posedge clock );
+        uart_wr_enable = 1'b0;
         
-        // End simulation after 10us
-        #10000;
+        
+         @(posedge clock );
+        uart_addr = 4'h4;       // DATA_REG address
+        wdata_mem = 32'h43;
+        uart_wr_enable = 1'b1;
+         @(posedge clock );
+        uart_wr_enable = 1'b0;
+        #30000;
+        uart_sel = 1'b1;
+        #2000;
         $finish;
     end
     
@@ -62,7 +70,9 @@ module uart_tb ();
         $dumpfile("waveform.vcd");
         $dumpvars(0, uart_tb);
     end
-    
+    always_comb begin 
+        rx_bit = tx_bit;
+    end
     // Monitor for display
     always @(posedge clock) begin
         if (uart_wr_enable) begin

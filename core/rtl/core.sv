@@ -1,15 +1,16 @@
 module core (
-    input logic reset,clock
+    input logic reset,clock,rx_bit,
+    output logic tx_bit
 );
-logic [31:0]inst,instruction,instruction_mem,pc,pc_execute,pc_next,pc_mem,pc_next_mem,result,rdata1,data1,data2,rdata2,rs1,rs2,immediate,rdata_mem,wdata_mem,reg_data,pc_in,alu_mem;
-logic [3:0]alu_op;
+logic [31:0]inst,instruction,instruction_mem,pc,pc_execute,pc_next,pc_mem,pc_next_mem,result,rdata1,data1,data2,rdata2,rs1,rs2,immediate,rdata_mem,wdata_mem,reg_data,pc_in,alu_mem,data;
+logic [3:0]alu_op,uart_addr;
 logic [2:0]rd_wr_mem,rd_wr_mem_mem,br_type;
 logic [1:0]wb_sel,wb_sel_mem;
-logic reg_wr,reg_wr_mem,sel_B,sel_A,mem_wr,mem_wr_mem,br_taken,stall,forward_sel_1,forward_sel_2;
+logic reg_wr,reg_wr_mem,sel_B,sel_A,mem_wr,mem_wr_mem,br_taken,stall,forward_sel_1,forward_sel_2,uart_sel,uart_wr_enable;
 
 //-----------fetch phase----------------
 
-//pc
+//pc  
 pc _pc(.clock,.reset,.pc_in,.pc);
 pc_add pc_4_add(.pc,.pc_next);
 // PC or ALU slector mux
@@ -50,9 +51,20 @@ pipline_execute_to_memory execute_to_memory_reg(.clock,.reset,.pc_execute,.alu_e
 .pc_mem, .alu_mem,.mem_wdata_mem(wdata_mem),.instruction_mem,.mem_wr_mem, .rd_wr_mem_mem,.reg_wr_mem,.wb_sel_mem);
 //add 4 in pc of memory phase
 pc_add pc_mem_4_add(.pc(pc_mem),.pc_next(pc_next_mem));
+
+//lsu unit
+lsu LSU(.*);
+
+//uart
+uart UART(.*);
+
 //data memory
 data_memory Data_memory(.clock,.reset,.addr_mem(alu_mem),.wdata_mem,.rdata_mem,.mem_wr(mem_wr_mem),.rd_wr_mem(rd_wr_mem_mem));
+
+//select uart or memory data mux
+mux2_1 UART_MEM_MUX(.input0(rdata_mem),.input1(uart_data),.out(data),.sel(uart_sel));
+
 //writeback mux
-mux3_1 writeback_mux(.input0(alu_mem),.input1(rdata_mem),.input2(pc_next_mem),.out(reg_data),.sel(wb_sel_mem));
+mux3_1 writeback_mux(.input0(alu_mem),.input1(data),.input2(pc_next_mem),.out(reg_data),.sel(wb_sel_mem));
 
 endmodule

@@ -34,14 +34,11 @@ else if (rx_baud_rate_reg_en) begin
     end
     else  begin
         rx_baud_rate_count<=rx_baud_rate_count_updated;
-        sample<=1'b1;
         rx_baud_rate <= 1'b0;
     end
 end
-else begin
-        rx_baud_rate_count<=16'b0;
-        sample<=1'b0;
-        rx_baud_rate <= 1'b0;
+else  begin
+    sample=1'b0;
 end
 end
 

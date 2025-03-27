@@ -27,8 +27,7 @@ module bit_count_reg (
             end
         end
         else begin
-            tx_bit_count <= 1'b0;
-            tx_bit_co <= 4'b0;  
+            tx_bit_count <= 1'b0; 
     end
     end
 
@@ -49,8 +48,7 @@ module bit_count_reg (
             end
         end
         else begin
-            rx_bit_count <= 1'b0;
-            rx_bit_co <= 4'b0;  
+            rx_bit_count <= 1'b0; 
     end
     end
 
