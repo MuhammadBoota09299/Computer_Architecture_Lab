@@ -35,13 +35,13 @@ always_comb begin
     };
 end
 
-// Control register 
-assign parity_enable = uart_ctrl_reg[7];  // Bit 7 = parity enable
-assign parity    = uart_ctrl_reg[6];  // Bit 6 = parity type (0=even, 1=odd)
-assign stop_bit  = uart_ctrl_reg[5];  // Bit 5 = stop bit (0=1-bit, 1=2-bit)
-assign uart_en   = uart_ctrl_reg[4];  // Bit 4 = UART enable
-assign tx_en     = uart_ctrl_reg[3];  // Bit 3 = transmitter enable
-assign rx_en     = uart_ctrl_reg[2];  // Bit 2 = receiver enable
+// Control register
+assign rx_en     = uart_ctrl_reg[5];  // Bit 5 = receiver enable 
+assign tx_en     = uart_ctrl_reg[4];  // Bit 4 = transmitter enable
+assign parity_enable = uart_ctrl_reg[3];  // Bit 3 = parity enable
+assign parity    = uart_ctrl_reg[2];  // Bit 2 = parity type (0=even, 1=odd)
+assign stop_bit  = uart_ctrl_reg[1];  // Bit 1 = stop bit (0=1-bit, 1=2-bit)
+assign uart_en   = uart_ctrl_reg[0];  // Bit 0 = UART enable
 
 // Baud_rate register
 assign baud_rate = uart_baud_rate_reg;
@@ -53,7 +53,7 @@ always_ff @(negedge clock ) begin
     if (reset) begin
         uart_data_reg<=8'b0;
         uart_baud_rate_reg<=16'b0;
-        uart_data_reg<=8'b0;
+        uart_ctrl_reg<=8'b0;
         tx_fifo_wr_en<=1'b0;
     end
     else if (uart_wr_enable) begin
@@ -72,6 +72,9 @@ always_ff @(negedge clock ) begin
             end
             default: tx_fifo_wr_en<=1'b0;
         endcase
+    end
+    else begin
+        tx_fifo_wr_en<=1'b0;
     end
 end
 always_comb begin 

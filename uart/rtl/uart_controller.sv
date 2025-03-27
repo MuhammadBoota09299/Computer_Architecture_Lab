@@ -92,14 +92,9 @@ always_comb begin
         RX_DATA_BITS: begin
             rx_busy=1'b1;
             rx_baud_rate_reg_en=1'b1;
-            if (rx_baud_rate) begin
-                rx_next_state=RX_DATA_BITS;
-                rx_bit_count_reg_en=1'b1;
-                rx_shift_reg_en=1'b1;
-            end
-            else if (rx_bit_count && (~parity_enable) && stop_bit) begin
+            if (rx_bit_count && (~parity_enable) && stop_bit) begin
                 rx_next_state=RX_STOP_BIT;
-                stop_bit_error = (rx_bit==1);
+                stop_bit_error = (rx_bit!=1);
                 rx_fifo_wr_en = 1'b1;
             end
             else if (rx_bit_count && parity_enable) begin
@@ -110,9 +105,15 @@ always_comb begin
             else if ( rx_bit_count && (~parity) && (~stop_bit)) begin
                 rx_next_state=RX_LOAD;
                 status_reg_en=1'b1;
-                stop_bit_error = (rx_bit==1);
+                rx_fifo_wr_en=1'b1;
+                stop_bit_error = (rx_bit!=1);
                 rx_busy=1'b0;
                 rx_baud_rate_reg_en=1'b0;
+            end
+            else if (rx_baud_rate) begin
+                rx_next_state=RX_DATA_BITS;
+                rx_bit_count_reg_en=1'b1;
+                rx_shift_reg_en=1'b1;
             end
             else begin
                 rx_next_state=RX_DATA_BITS;
@@ -123,12 +124,12 @@ always_comb begin
             rx_baud_rate_reg_en=1'b1;
             if (rx_baud_rate && stop_bit) begin
                 rx_next_state=RX_STOP_BIT;
-                stop_bit_error = (rx_bit==1);
+                stop_bit_error = (rx_bit!=1);
             end
             else if (rx_baud_rate && ~stop_bit) begin
                 rx_next_state=RX_LOAD;
                 status_reg_en=1'b1;
-                stop_bit_error = (rx_bit==1);
+                stop_bit_error = (rx_bit!=1);
                 rx_baud_rate_reg_en=1'b0;
                 rx_busy=1'b0;  
             end
@@ -137,10 +138,11 @@ always_comb begin
             end
         end
         RX_STOP_BIT:begin
+            rx_baud_rate_reg_en=1'b1;
             if (rx_baud_rate) begin
                 rx_next_state=RX_LOAD;
                 status_reg_en=1'b1;
-                stop_bit_error=(rx_bit==1) || stop_bit_error;
+                stop_bit_error=(rx_bit!=1) || stop_bit_error;
             end
             else begin
                 rx_next_state=RX_STOP_BIT;
@@ -193,7 +195,7 @@ always_comb begin
         TX_TRANSMIT:begin
             tx_baud_rate_reg_en=1'b1;
             tx_busy=1'b1;
-            if ( rx_baud_rate)begin
+            if ( tx_baud_rate)begin
                  tx_next_state=TX_START_BIT;
                  tx_shift_en=1'b1;
             end
@@ -228,7 +230,7 @@ always_comb begin
                 tx_next_state=TX_PARITY;
                 tx_shift_en=1'b1;
             end
-            else if ( tx_bit_count && (~parity) && (~stop_bit) && (tx_fifo_empty)) begin
+            else if ( tx_bit_count && (~parity) && (~stop_bit)) begin
                 tx_next_state=TX_LOAD;
                 tx_shift_en=1'b1;
                 tx_busy=1'b0;
@@ -245,7 +247,7 @@ always_comb begin
                 tx_shift_en=1'b1;
                 tx_busy=1'b1;
             end
-            else if (tx_baud_rate && ~stop_bit && (tx_fifo_empty)) begin
+            else if (tx_baud_rate && ~stop_bit) begin
                 tx_next_state=TX_LOAD;
                 tx_baud_rate_reg_en=1'b0;
                 tx_shift_en=1'b1;  
@@ -257,6 +259,7 @@ always_comb begin
             end
         end
         TX_STOP_BIT:begin
+            tx_baud_rate_reg_en=1'b1;
             if (tx_baud_rate) begin
                 tx_next_state=TX_LOAD;
                 tx_shift_en=1'b1;
