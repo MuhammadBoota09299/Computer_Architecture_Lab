@@ -1,22 +1,33 @@
 # Verilog source files
 SRC_FILES = \
-    ../rtl/defines/packages.sv \
-    ../rtl/alu.sv \
-    ../rtl/branch.sv \
-    ../rtl/core.sv \
-    ../rtl/data_memory.sv \
-    ../rtl/decoder.sv \
-    ../rtl/instruction_memory.sv \
-    ../rtl/mux2_1.sv \
-    ../rtl/mux3_1.sv \
-    ../rtl/pc.sv \
-    ../rtl/pc_add.sv \
-    ../rtl/pipline_reg.sv \
-    ../rtl/registerfile.sv \
-    core_tb.sv
+    ./core/rtl/defines/packages.sv \
+    ./core/rtl/alu.sv \
+    ./core/rtl/branch.sv \
+    ./core/rtl/data_memory.sv \
+    ./core/rtl/decoder.sv \
+    ./core/rtl/instruction_memory.sv \
+    ./core/rtl/mux2_1.sv \
+    ./core/rtl/mux3_1.sv \
+    ./core/rtl/pc.sv \
+    ./core/rtl/pc_add.sv \
+    ./core/rtl/pipline_reg.sv \
+    ./core/rtl/registerfile.sv \
+    ./core/rtl/lsu.sv \
+    ./uart/rtl/bit_count_reg.sv \
+    ./uart/rtl/buad_rate_reg.sv \
+    ./uart/rtl/parity_calculate.sv \
+    ./uart/rtl/rx_fifo.sv \
+    ./uart/rtl/rx_shift_reg.sv \
+    ./uart/rtl/tx_fifo.sv \
+    ./uart/rtl/tx_shift_reg.sv \
+    ./uart/rtl/uart.sv \
+    ./uart/rtl/uart_controller.sv \
+    ./uart/rtl/uart_registerfile.sv \
+    ./core/rtl/core.sv \
+    ./core/testbench/core_tb.sv
 
-# Include directory
-INCLUDE_DIR = ../rtl/defines
+# Include directory (relative to where make is run)
+INCLUDE_DIR = ./core/rtl/defines
 
 # ModelSim commands
 VLIB = vlib
@@ -26,22 +37,18 @@ VSIM = vsim
 # Work library
 WORK_LIB = work
 
-# Default target to compile and run the simulation
+# Default target
 all: clean compile simulate
 
-# Create work library
 compile:
 	@echo "Creating work library..."
 	$(VLIB) $(WORK_LIB)
-
 	@echo "Compiling Verilog files..."
 	$(VLOG) -sv +incdir+$(INCLUDE_DIR) $(SRC_FILES)
 
-# Run the simulation
 simulate:
 	@echo "Running simulation..."
 	$(VSIM) -c -do "run -all; quit" core_tb
 
-# Clean up generated files
 clean:
 	rm -rf $(WORK_LIB) transcript *.vcd *.wlf
