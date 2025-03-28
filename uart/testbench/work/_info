@@ -11,7 +11,7 @@ cModel Technology
 Z0 d/home/aziz/Documents/Computer_Architecture_Lab/uart/testbench
 vbaud_rate_reg
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1743064529
+Z2 !s110 1743083072
 !i10b 1
 !s100 fRE9FK3T`0EI2LM<Sdj1V3
 Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -28,7 +28,7 @@ Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1743064529.000000
+Z6 !s108 1743083072.000000
 !s107 uart_tb.sv|../rtl/uart_registerfile.sv|../rtl/uart_controller.sv|../rtl/uart.sv|../rtl/tx_shift_reg.sv|../rtl/tx_fifo.sv|../rtl/rx_shift_reg.sv|../rtl/rx_fifo.sv|../rtl/parity_calculate.sv|../rtl/buad_rate_reg.sv|../rtl/bit_count_reg.sv|/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv|
 Z7 !s90 -sv|+incdir+../core/rtl/defines|/home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv|../rtl/bit_count_reg.sv|../rtl/buad_rate_reg.sv|../rtl/parity_calculate.sv|../rtl/rx_fifo.sv|../rtl/rx_shift_reg.sv|../rtl/tx_fifo.sv|../rtl/tx_shift_reg.sv|../rtl/uart.sv|../rtl/uart_controller.sv|../rtl/uart_registerfile.sv|uart_tb.sv|
 !i113 1

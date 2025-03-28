@@ -2,11 +2,11 @@ module core (
     input logic reset,clock,rx_bit,
     output logic tx_bit
 );
-logic [31:0]inst,instruction,instruction_mem,pc,pc_execute,pc_next,pc_mem,pc_next_mem,result,rdata1,data1,data2,rdata2,rs1,rs2,immediate,rdata_mem,wdata_mem,reg_data,pc_in,alu_mem,data;
+logic [31:0]inst,instruction,instruction_mem,pc,pc_execute,pc_next,pc_mem,pc_next_mem,result,rdata1,data1,data2,rdata2,rs1,rs2,immediate,rdata_mem,wdata_mem,reg_data,pc_in,alu_mem,data,uart_data;
 logic [3:0]alu_op,uart_addr;
 logic [2:0]rd_wr_mem,rd_wr_mem_mem,br_type;
 logic [1:0]wb_sel,wb_sel_mem;
-logic reg_wr,reg_wr_mem,sel_B,sel_A,mem_wr,mem_wr_mem,br_taken,stall,forward_sel_1,forward_sel_2,uart_sel,uart_wr_enable;
+logic reg_wr,reg_wr_mem,sel_B,sel_A,mem_wr,mem_wr_mem,br_taken,stall,forward_sel_1,forward_sel_2,uart_sel,uart_wr_enable,mem_wr_en;
 
 //-----------fetch phase----------------
 
@@ -59,11 +59,10 @@ lsu LSU(.*);
 uart UART(.*);
 
 //data memory
-data_memory Data_memory(.clock,.reset,.addr_mem(alu_mem),.wdata_mem,.rdata_mem,.mem_wr(mem_wr_mem),.rd_wr_mem(rd_wr_mem_mem));
+data_memory Data_memory(.clock,.reset,.addr_mem(alu_mem),.wdata_mem,.rdata_mem,.mem_wr(mem_wr_en),.rd_wr_mem(rd_wr_mem_mem));
 
 //select uart or memory data mux
 mux2_1 UART_MEM_MUX(.input0(rdata_mem),.input1(uart_data),.out(data),.sel(uart_sel));
-
 //writeback mux
 mux3_1 writeback_mux(.input0(alu_mem),.input1(data),.input2(pc_next_mem),.out(reg_data),.sel(wb_sel_mem));
 
