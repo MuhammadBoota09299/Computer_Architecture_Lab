@@ -1,5 +1,5 @@
 # vsim -c -do "run -all; quit" uart_tb 
-# Start time: 13:35:30 on Mar 27,2025
+# Start time: 18:44:33 on Mar 27,2025
 # Loading sv_std.std
 # Loading work.uart_tb
 # Loading work.uart
@@ -221,5 +221,5 @@
 # [32095] Read Data: 0x000000xx
 # ** Note: $finish    : uart_tb.sv(65)
 #    Time: 32105 ps  Iteration: 0  Instance: /uart_tb
-# End time: 13:35:30 on Mar 27,2025, Elapsed time: 0:00:00
+# End time: 18:44:33 on Mar 27,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
