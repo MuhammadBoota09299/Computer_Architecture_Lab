@@ -3,11 +3,12 @@ module core_tb;
     // Signals
     logic clock;
     logic reset;
+    logic tx_bit;
+    logic rx_bit;
 
     // Instantiate the processor
     core uut (
-        .clock(clock),
-        .reset(reset)
+        .*
     );
 
     // Clock generation
@@ -21,10 +22,12 @@ module core_tb;
         reset = 1;
         #10 reset = 0;  // De-assert reset after 10ns
 
-        #300;  // Run simulation for 100ns
+        #300000;  // Run simulation for 100ns
         $finish; // End simulation
     end
-
+always_comb begin 
+    rx_bit=tx_bit;
+end
     // Dump waveforms
     initial begin
         $dumpfile("waveform.vcd");
