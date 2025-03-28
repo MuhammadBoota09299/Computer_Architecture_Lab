@@ -1,0 +1,42 @@
+# vsim -c -do "run -all; quit" core_tb 
+# Start time: 20:18:52 on Mar 28,2025
+# Loading sv_std.std
+# Loading work.core_tb
+# Loading work.core
+# Loading work.pc
+# Loading work.pc_add
+# Loading work.mux2_1
+# Loading work.instruction_memory
+# Loading work.pipline_fetch_to_decode
+# Loading work.registerfile
+# Loading work.packages
+# Loading work.decoder_sv_unit
+# Loading work.decoder
+# Loading work.alu_sv_unit
+# Loading work.alu
+# Loading work.branch_sv_unit
+# Loading work.branch
+# Loading work.pipline_execute_to_memory
+# Loading work.lsu_sv_unit
+# Loading work.lsu
+# Loading work.uart
+# Loading work.bit_count_reg
+# Loading work.baud_rate_reg
+# Loading work.parity_calculate
+# Loading work.rx_fifo
+# Loading work.rx_shift_reg
+# Loading work.tx_shift_reg
+# Loading work.tx_fifo
+# Loading work.uart_controller
+# Loading work.uart_registerfile_sv_unit
+# Loading work.uart_registerfile
+# Loading work.data_memory_sv_unit
+# Loading work.data_memory
+# Loading work.mux3_1
+# run -all
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 102 of file "/home/aziz/Documents/Computer_Architecture_Lab/assembly/c_commands/build/main.txt". (Current address [101], address range [0:100])    : /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/instruction_memory.sv(11)
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/uut/_instruction_memory
+# ** Note: $finish    : /home/aziz/Documents/Computer_Architecture_Lab/core/testbench/core_tb.sv(26)
+#    Time: 300010 ps  Iteration: 0  Instance: /core_tb
+# End time: 20:18:57 on Mar 28,2025, Elapsed time: 0:00:05
+# Errors: 0, Warnings: 1

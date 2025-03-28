@@ -1,30 +1,30 @@
 # Verilog source files
 SRC_FILES = \
-    ./core/rtl/defines/packages.sv \
-    ./core/rtl/alu.sv \
-    ./core/rtl/branch.sv \
-    ./core/rtl/data_memory.sv \
-    ./core/rtl/decoder.sv \
-    ./core/rtl/instruction_memory.sv \
-    ./core/rtl/mux2_1.sv \
-    ./core/rtl/mux3_1.sv \
-    ./core/rtl/pc.sv \
-    ./core/rtl/pc_add.sv \
-    ./core/rtl/pipline_reg.sv \
-    ./core/rtl/registerfile.sv \
-    ./core/rtl/lsu.sv \
-    ./uart/rtl/bit_count_reg.sv \
-    ./uart/rtl/buad_rate_reg.sv \
-    ./uart/rtl/parity_calculate.sv \
-    ./uart/rtl/rx_fifo.sv \
-    ./uart/rtl/rx_shift_reg.sv \
-    ./uart/rtl/tx_fifo.sv \
-    ./uart/rtl/tx_shift_reg.sv \
-    ./uart/rtl/uart.sv \
-    ./uart/rtl/uart_controller.sv \
-    ./uart/rtl/uart_registerfile.sv \
-    ./core/rtl/core.sv \
-    ./core/testbench/core_tb.sv
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/defines/packages.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/alu.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/branch.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/data_memory.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/decoder.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/instruction_memory.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/mux2_1.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/mux3_1.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/pc.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/pc_add.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/pipline_reg.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/registerfile.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/lsu.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/uart/rtl/bit_count_reg.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/uart/rtl/buad_rate_reg.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/uart/rtl/parity_calculate.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/uart/rtl/rx_fifo.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/uart/rtl/rx_shift_reg.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/uart/rtl/tx_fifo.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/uart/rtl/tx_shift_reg.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/uart/rtl/uart.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/uart/rtl/uart_controller.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/uart/rtl/uart_registerfile.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/rtl/core.sv \
+    /home/aziz/Documents/Computer_Architecture_Lab/core/testbench/core_tb.sv
 
 # Include directory (relative to where make is run)
 INCLUDE_DIR = ./core/rtl/defines
