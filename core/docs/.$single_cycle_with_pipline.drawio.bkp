@@ -672,7 +672,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="Np-ABr15ij-Jm8Wm-Wb1-181" value="addr_mem" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=1;fontSize=19;container=0;" parent="Np-ABr15ij-Jm8Wm-Wb1-118" vertex="1" connectable="0">
+        <mxCell id="Np-ABr15ij-Jm8Wm-Wb1-181" value="alu_mem" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontStyle=1;fontSize=19;container=0;" parent="Np-ABr15ij-Jm8Wm-Wb1-118" vertex="1" connectable="0">
           <mxGeometry x="-0.8845" y="-1" relative="1" as="geometry">
             <mxPoint x="22" y="-18" as="offset" />
           </mxGeometry>
