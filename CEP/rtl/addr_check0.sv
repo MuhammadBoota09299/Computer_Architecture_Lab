@@ -1,5 +1,5 @@
 module addr_check_0 (
-    input logic [31:0]addr,addr_n_plus,adrr_n
+    input logic [31:0]addr,addr_n_1,adrr_n
     input logic [4:0]size,
     input logic [1:0]a_n,
     output logic out;
