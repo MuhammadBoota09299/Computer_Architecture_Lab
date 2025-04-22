@@ -12,9 +12,13 @@ module pmp_check (
     
     logic [15:0]pri;
     logic [3:0]entry_num;
+    logic [31:0]pmpcfg_reg_selected;
 
     pmpcfg pmp0cfg,pmp1cfg,pmp2cfg,pmp3cfg,pmp4cfg,pmp5cfg,pmp6cfg,pmp7cfg,pmp8cfg,pmp9cfg,pmp10cfg,pmp11cfg,
     pmp12cfg,pmp13cfg,pmp14cfg,,pmp15cfg;
+
+    pmpcfg pmpcfg_selected;
+
 
     assign {pmp3cfg,  pmp2cfg,  pmp1cfg,  pmp0cfg}   = pmpcfg0_data;
     assign {pmp7cfg,  pmp6cfg,  pmp5cfg,  pmp4cfg}   = pmpcfg1_data;
@@ -41,7 +45,7 @@ module pmp_check (
 
 
 
-always_comb begin : priority circuit
+always_comb begin : priority_circuit
     pri={out15,out14,out13,out12,out11,out10,out9,out8,out7,out6,out5,out4,out3,out2,out1,out0};
     casez (pri)  // casez allows ? for don't-care bits
         16'b???????????????1: entry_num = 4'd0;
@@ -60,7 +64,16 @@ always_comb begin : priority circuit
         16'b??10000000000000: entry_num = 4'd13;
         16'b?100000000000000: entry_num = 4'd14;
         16'b1000000000000000: entry_num = 4'd15;
-        default=position=4'b0;
+        default:position=4'b0;
+    endcase
+end
+always_comb begin : selction_of_pmpcfg_reg_and_entry
+    case (entry_num[3:2])
+        4'd0:pmpcfg_reg_selected=pmpcfg0_data;
+        4'd1:pmpcfg_reg_selected=pmpcfg1_data;
+        4'd2:pmpcfg_reg_selected=pmpcfg2_data;
+        4'd3:pmpcfg_reg_selected=pmpcfg3_data;
+        default: pmpcfg_reg_selected=32'b0;
     endcase
 end
 endmodule
