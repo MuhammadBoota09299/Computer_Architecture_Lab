@@ -3,8 +3,8 @@ module pmp_check (
     pmpaddr7_data,pmpaddr8_data,pmpaddr9_data,pmpaddr10_data,pmpaddr11_data,pmpaddr12_data,pmpaddr13_data14,pmpaddr_data,
     pmpaddr15_data,
     input logic [31:0] pmpcfg0_data, pmpcfg1_data, pmpcfg2_data, pmpcfg3_data
-    input logic [4:0]size,
-    input logic [1:0]prive_mode,
+    input logic [2:0]size,
+    input logic [1:0]prive_mode,oper,
     input logic [31:0]addr,
     output logic [1:0]permission
 );
@@ -13,6 +13,7 @@ module pmp_check (
     logic [15:0]pri;
     logic [3:0]entry_num;
     logic [31:0]pmpcfg_reg_selected;
+    logic oper_permission;
 
     pmpcfg pmp0cfg,pmp1cfg,pmp2cfg,pmp3cfg,pmp4cfg,pmp5cfg,pmp6cfg,pmp7cfg,pmp8cfg,pmp9cfg,pmp10cfg,pmp11cfg,
     pmp12cfg,pmp13cfg,pmp14cfg,,pmp15cfg;
@@ -82,5 +83,13 @@ always_comb begin : selction_of_pmpcfg_reg_and_entry
         4'd3:pmpcfg_selected=pmpcfg_reg_selected[31:24];
         default: pmpcfg_reg_selected=8'b0;
     endcase
+    case (oper)
+        2'b00:oper_permission=pmpcfg_selected.R;
+        2'b01:oper_permission=pmpcfg_selected.W;
+        2'b10:oper_permission=pmpcfg_selected.X;
+        default:oper_permission=1'b0; 
+    endcase
 end
+assign 
+
 endmodule
