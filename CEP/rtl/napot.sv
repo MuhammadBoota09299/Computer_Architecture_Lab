@@ -6,7 +6,7 @@ module napot (
 logic [4:0]position;
 logic [31:0]noes,base,offset;
 
-assign ones=~(32'b1 << positon);
+assign ones=~(32'b1 << positon+1);
 assign base=(addr_n & (ones));
 assign offset=(32'h8<<position);
 assign napot_out=(((base) + offset-1) >= (addr+size-1)) && (addr >= (base));
