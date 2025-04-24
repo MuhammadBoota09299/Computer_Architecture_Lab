@@ -45,7 +45,7 @@ package packages;
     } load_store;
 
     // Base address (configurable)
-    parameter UART_BASE_ADDRESS = 28'h20;
+    parameter UART_BASE_ADDRESS = 28'h1600000;
     // Register address mapping using enum
     typedef enum logic [3:0] {
         STATUS_REG = 4'h0,

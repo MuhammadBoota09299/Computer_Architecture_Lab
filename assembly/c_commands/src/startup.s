@@ -13,7 +13,7 @@
 .type vtable, %object
 .section .text.vector_table,"a",%progbits
 # this entry is to align reset_handler at address 0x04
-  .word 0x00000013        
+  .word 0x00000000        
   j        reset_handler
   .align 6
 vtable:

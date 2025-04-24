@@ -57,7 +57,10 @@ always_comb begin
     rx_fifo_wr_en=1'b0;
     rx_busy=1'b0;
     case (rx_current_state)
-        RX_IDLE:if (uart_en) rx_next_state=RX_LOAD; else rx_next_state=RX_IDLE;
+        RX_IDLE:begin
+            if (uart_en) rx_next_state=RX_LOAD; else rx_next_state=RX_IDLE;
+            stop_bit_error=1'b0;
+        end 
         RX_LOAD:begin
             if (rx_en && ~rx_fifo_full && ~rx_bit) begin
                 rx_next_state=RX_RECEIVE;

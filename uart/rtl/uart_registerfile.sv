@@ -21,19 +21,8 @@ module uart_registerfile (
 logic [7:0] uart_data_reg,uart_ctrl_reg, uart_status_reg;
 logic [15:0] uart_baud_rate_reg;
 
-// Status register
-always_comb begin
-    uart_status_reg = {
-        rx_fifo_rd_en,   // Bit 7: fifo rd_en
-        tx_fifo_wr_en,   // Bit 6: fifo wr_en
-        tx_fifo_full,    // Bit 5: TX FIFO full
-        rx_fifo_full,    // Bit 4: RX FIFO full
-        rx_fifo_empty,   // Bit 3: RX FIFO empty
-        parity_error,    // Bit 2: Parity error
-        stop_bit_error,  // Bit 1: Stop bit error
-        busy             // Bit 0: UART busy
-    };
-end
+
+
 
 // Control register
 assign rx_en     = uart_ctrl_reg[5];  // Bit 5 = receiver enable 
@@ -55,6 +44,7 @@ always_ff @(negedge clock ) begin
         uart_baud_rate_reg<=16'b0;
         uart_ctrl_reg<=8'b0;
         tx_fifo_wr_en<=1'b0;
+        uart_status_reg <=1'b0;
     end
     else if (uart_wr_enable) begin
         case (uart_addr)
@@ -75,6 +65,20 @@ always_ff @(negedge clock ) begin
     end
     else begin
         tx_fifo_wr_en<=1'b0;
+    end
+
+    // Status register
+    if (status_reg_en ) begin
+        uart_status_reg = {
+        rx_fifo_rd_en,   // Bit 7: fifo rd_en
+        tx_fifo_wr_en,   // Bit 6: fifo wr_en
+        rx_fifo_full,    // Bit 5: RX FIFO full
+        tx_fifo_full,    // Bit 4: TX FIFO full
+        rx_fifo_empty,   // Bit 3: RX FIFO empty
+        parity_error,    // Bit 2: Parity error
+        stop_bit_error,  // Bit 1: Stop bit error
+        busy             // Bit 0: UART busy
+    };
     end
 end
 always_comb begin 

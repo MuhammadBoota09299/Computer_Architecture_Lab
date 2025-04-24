@@ -8,7 +8,7 @@ module data_memory (
 logic [7:0]memory[100:0];
     always_ff @( negedge clock ) begin 
         if (reset) begin
-            memory<=$readmemh("/home/aziz/Documents/Computer_Architecture_Lab/core/testbench/data_memory.txt",register_file);;
+            $readmemh("/home/aziz/Documents/Computer_Architecture_Lab/core/testbench/data_memory.txt",memory);
         end
         else if (mem_wr && addr_mem > 32'b0)begin
             case (rd_wr_mem)
@@ -36,8 +36,5 @@ logic [7:0]memory[100:0];
             LW_SW  : rdata_mem = {memory[addr_mem+3],memory[addr_mem +2],memory[addr_mem+1],memory[addr_mem]};
             default: rdata_mem = {{24{memory[addr_mem][7]}}, memory[addr_mem]};
         endcase
-    end
-    initial begin
-        $readmemh("/home/aziz/Documents/Computer_Architecture_Lab/core/testbench/data_memory.txt",memory);
     end
 endmodule
