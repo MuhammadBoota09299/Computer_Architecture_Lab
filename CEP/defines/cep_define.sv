@@ -1,3 +1,5 @@
+package cep_define;
+
 typedef enum logic [11:0] {
     // PMP Configuration CSRs (4 entries per cfg)
     CSR_PMPCFG0  = 12'h3A0,
@@ -32,3 +34,5 @@ typedef struct packed {
     logic [1:0]  reserved; // Reserved bits (bits 6:5)
     logic        L;      // Lock bit (bit 7)
 } pmpcfg;
+
+endpackage

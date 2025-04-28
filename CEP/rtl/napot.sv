@@ -1,19 +1,19 @@
 module napot (
     input logic [31:0] addr,addr_n,
-    input logic [2:0]size,
+    input logic [1:0]size,
     output logic napot_out
 );
 logic [4:0]position;
-logic [31:0]noes,base,offset;
+logic [31:0]ones,base,offset;
 
-assign ones=~(32'b1 << positon+1);
+assign ones=~(32'b1 << position+1);
 assign base=(addr_n & (ones));
 assign offset=(32'h8<<position);
-assign napot_out=(((base) + offset-1) >= (addr+size-1)) && (addr >= (base));
+assign napot_out=(((base) + offset-1) >= (addr+size)) && (addr >= (base));
 
 
 
-always_comb begin :priority circuit
+always_comb begin :priority_circuit
     casez (addr_n)  // casez allows ? for don't-care bits
         32'b???????????????????????????????1: position = 5'd0;
         32'b??????????????????????????????10: position = 5'd1;

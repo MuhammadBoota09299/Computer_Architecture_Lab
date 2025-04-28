@@ -1,0 +1,38 @@
+# Reading pref.tcl
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# vsim -gui -voptargs="+acc" work.pmp_tb -do "add wave -r * ; run -all; run;" 
+# Start time: 13:36:04 on Apr 28,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading sv_std.std
+# Loading work.pmp_tb(fast)
+# Loading work.pmp(fast)
+# Loading work.cep_define(fast)
+# Loading work.pmp_registers_sv_unit(fast)
+# Loading work.pmp_registers(fast)
+# Loading work.pmp_check_sv_unit(fast)
+# Loading work.pmp_check(fast)
+# Loading work.addr_check_n(fast)
+# Loading work.tor(fast)
+# Loading work.na4(fast)
+# Loading work.napot(fast)
+# add wave -r * 
+#  run -all
+# ** Note: $finish    : pmp_tb.sv(23)
+#    Time: 0 ns  Iteration: 0  Instance: /pmp_tb
+# 1
+# Break in Module pmp_tb at pmp_tb.sv line 23
+#  run
+# 

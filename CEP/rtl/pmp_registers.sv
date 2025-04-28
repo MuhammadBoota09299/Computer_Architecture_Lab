@@ -1,10 +1,11 @@
+import cep_define ::*;
 module pmp_registers (
     input logic clock ,reset,wr_en,
-    input logic [1:0]prive_mode,
+    input logic [1:0]priv_mode,
     input logic [31:0]wdata,rw_addr,
     output logic [31:0]rdata,
-    pmpaddr0_data,pmpaddr1_data1,pmpaddr2_data,pmpaddr3_data,pmpaddr4_data,pmpaddr5_data,pmpaddr6_data,pmpaddr7_data,
-    pmpaddr8_data,pmpaddr9_data,pmpaddr10_data,pmpaddr11_data,pmpaddr12_data,pmpaddr13_data14,pmpaddr_data,pmpaddr15_data,
+    pmpaddr0_data,pmpaddr1_data,pmpaddr2_data,pmpaddr3_data,pmpaddr4_data,pmpaddr5_data,pmpaddr6_data,pmpaddr7_data,
+    pmpaddr8_data,pmpaddr9_data,pmpaddr10_data,pmpaddr11_data,pmpaddr12_data,pmpaddr13_data,pmpaddr14_data,pmpaddr15_data,
     output logic [31:0] pmpcfg0_data, pmpcfg1_data, pmpcfg2_data, pmpcfg3_data
 );
 
@@ -38,59 +39,59 @@ module pmp_registers (
             pmpaddr15<=32'b0;
 
         end
-        else if (wr_en && (prive_mode==2'b0)) begin
+        else if (wr_en && (priv_mode==2'b0)) begin
             case (rw_addr)
                 CSR_PMPCFG0:
                     if (~(pmpcfg0[7]  || pmpcfg0[15] || pmpcfg0[23] || pmpcfg0[31]))
-                        pmpcfg0 <= data;
+                        pmpcfg0 <= wdata;
             
                 CSR_PMPCFG1:
                     if (~(pmpcfg1[7]  || pmpcfg1[15] || pmpcfg1[23] || pmpcfg1[31]))
-                        pmpcfg1 <= data;
+                        pmpcfg1 <= wdata;
             
                 CSR_PMPCFG2:
                     if (~(pmpcfg2[7]  || pmpcfg2[15] || pmpcfg2[23] || pmpcfg2[31]))
-                        pmpcfg2 <= data;
+                        pmpcfg2 <= wdata;
             
                 CSR_PMPCFG3:
                     if (~(pmpcfg3[7]  || pmpcfg3[15] || pmpcfg3[23] || pmpcfg3[31]))
-                        pmpcfg3 <= data;
+                        pmpcfg3 <= wdata;
                 
                 CSR_PMPADDR0:
-                    if (~pmpcfg0[7])        pmpaddr0  <= data;
+                    if (~pmpcfg0[7])        pmpaddr0  <= wdata;
                 CSR_PMPADDR1:
-                    if (~pmpcfg0[15])       pmpaddr1  <= data;
+                    if (~pmpcfg1[15])       pmpaddr1  <= wdata;
                 CSR_PMPADDR2:
-                    if (~pmpcfg0[23])       pmpaddr2  <= data;
+                    if (~pmpcfg0[23])       pmpaddr2  <= wdata;
                 CSR_PMPADDR3:
-                    if (~pmpcfg0[31])       pmpaddr3  <= data;
+                    if (~pmpcfg0[31])       pmpaddr3  <= wdata;
             
                 CSR_PMPADDR4:
-                    if (~pmpcfg1[7])        pmpaddr4  <= data;
+                    if (~pmpcfg1[7])        pmpaddr4  <= wdata;
                 CSR_PMPADDR5:
-                    if (~pmpcfg1[15])       pmpaddr5  <= data;
+                    if (~pmpcfg1[15])       pmpaddr5  <= wdata;
                 CSR_PMPADDR6:
-                    if (~pmpcfg1[23])       pmpaddr6  <= data;
+                    if (~pmpcfg1[23])       pmpaddr6  <= wdata;
                 CSR_PMPADDR7:
-                    if (~pmpcfg1[31])       pmpaddr7  <= data;
+                    if (~pmpcfg1[31])       pmpaddr7  <= wdata;
             
                 CSR_PMPADDR8:
-                    if (~pmpcfg2[7])        pmpaddr8  <= data;
+                    if (~pmpcfg2[7])        pmpaddr8  <= wdata;
                 CSR_PMPADDR9:
-                    if (~pmpcfg2[15])       pmpaddr9  <= data;
+                    if (~pmpcfg2[15])       pmpaddr9  <= wdata;
                 CSR_PMPADDR10:
-                    if (~pmpcfg2[23])       pmpaddr10 <= data;
+                    if (~pmpcfg2[23])       pmpaddr10 <= wdata;
                 CSR_PMPADDR11:
-                    if (~pmpcfg2[31])       pmpaddr11 <= data;
+                    if (~pmpcfg2[31])       pmpaddr11 <= wdata;
             
                 CSR_PMPADDR12:
-                    if (~pmpcfg3[7])        pmpaddr12 <= data;
+                    if (~pmpcfg3[7])        pmpaddr12 <= wdata;
                 CSR_PMPADDR13:
-                    if (~pmpcfg3[15])       pmpaddr13 <= data;
+                    if (~pmpcfg3[15])       pmpaddr13 <= wdata;
                 CSR_PMPADDR14:
-                    if (~pmpcfg3[23])       pmpaddr14 <= data;
+                    if (~pmpcfg3[23])       pmpaddr14 <= wdata;
                 CSR_PMPADDR15:
-                    if (~pmpcfg3[31])       pmpaddr15 <= data;
+                    if (~pmpcfg3[31])       pmpaddr15 <= wdata;
             
                 default: /* do nothing */;
             endcase
@@ -98,33 +99,36 @@ module pmp_registers (
         end
     end
 
-    always_comb begin 
-        case (rw_addr)
-              // PMP Configuration CSRs
-            CSR_PMPCFG0:   rdata = pmpcfg0;
-            CSR_PMPCFG1:   rdata = pmpcfg1;
-            CSR_PMPCFG2:   rdata = pmpcfg2;
-            CSR_PMPCFG3:   rdata = pmpcfg3;
-        
-            // PMP Address CSRs
-            CSR_PMPADDR0:  rdata = pmpaddr0;
-            CSR_PMPADDR1:  rdata = pmpaddr1;
-            CSR_PMPADDR2:  rdata = pmpaddr2;
-            CSR_PMPADDR3:  rdata = pmpaddr3;
-            CSR_PMPADDR4:  rdata = pmpaddr4;
-            CSR_PMPADDR5:  rdata = pmpaddr5;
-            CSR_PMPADDR6:  rdata = pmpaddr6;
-            CSR_PMPADDR7:  rdata = pmpaddr7;
-            CSR_PMPADDR8:  rdata = pmpaddr8;
-            CSR_PMPADDR9:  rdata = pmpaddr9;
-            CSR_PMPADDR10: rdata = pmpaddr10;
-            CSR_PMPADDR11: rdata = pmpaddr11;
-            CSR_PMPADDR12: rdata = pmpaddr12;
-            CSR_PMPADDR13: rdata = pmpaddr13;
-            CSR_PMPADDR14: rdata = pmpaddr14;
-            CSR_PMPADDR15: rdata = pmpaddr15;
-            default:       rdata = 32'b0;
-        endcase
+    always_comb begin
+        if (priv_mode==2'b0 && !wr_en) begin
+            case (rw_addr)
+                  // PMP Configuration CSRs
+                CSR_PMPCFG0:   rdata = pmpcfg0;
+                CSR_PMPCFG1:   rdata = pmpcfg1;
+                CSR_PMPCFG2:   rdata = pmpcfg2;
+                CSR_PMPCFG3:   rdata = pmpcfg3;
+            
+                // PMP Address CSRs
+                CSR_PMPADDR0:  rdata = pmpaddr0;
+                CSR_PMPADDR1:  rdata = pmpaddr1;
+                CSR_PMPADDR2:  rdata = pmpaddr2;
+                CSR_PMPADDR3:  rdata = pmpaddr3;
+                CSR_PMPADDR4:  rdata = pmpaddr4;
+                CSR_PMPADDR5:  rdata = pmpaddr5;
+                CSR_PMPADDR6:  rdata = pmpaddr6;
+                CSR_PMPADDR7:  rdata = pmpaddr7;
+                CSR_PMPADDR8:  rdata = pmpaddr8;
+                CSR_PMPADDR9:  rdata = pmpaddr9;
+                CSR_PMPADDR10: rdata = pmpaddr10;
+                CSR_PMPADDR11: rdata = pmpaddr11;
+                CSR_PMPADDR12: rdata = pmpaddr12;
+                CSR_PMPADDR13: rdata = pmpaddr13;
+                CSR_PMPADDR14: rdata = pmpaddr14;
+                CSR_PMPADDR15: rdata = pmpaddr15;
+                default:       rdata = 32'b0;
+            endcase
+        end 
+        else rdata = 32'b0;
     end
 
     assign pmpcfg0_data = pmpcfg0;
@@ -148,5 +152,5 @@ module pmp_registers (
     assign pmpaddr12_data = pmpaddr12;
     assign pmpaddr13_data = pmpaddr13;
     assign pmpaddr14_data = pmpaddr14;
-    assign pmpaddr15_data = pmpaddr15
+    assign pmpaddr15_data = pmpaddr15;
 endmodule
