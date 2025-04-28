@@ -37,7 +37,8 @@ module pmp_tb ();
     #4;
     @(posedge clock)
      reset = 1'b0;
-    // Test case 1: Basic write and read
+     
+                                              // Test case 1: Basic write and read
     wr_en = 1'b1;
     oper = WRITE;
     priv_mode = 2'b00;
