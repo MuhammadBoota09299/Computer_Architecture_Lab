@@ -35,4 +35,11 @@ typedef struct packed {
     logic        R;      // Read permission (bit 0)
 } pmpcfg;
 
+typedef enum logic[1:0] { 
+    OFF,
+    TOR,
+    NA4,
+    NAPOT
+ } mode;
+
 endpackage

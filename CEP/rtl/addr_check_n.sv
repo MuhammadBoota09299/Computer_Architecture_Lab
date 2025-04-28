@@ -1,3 +1,4 @@
+import cep_define ::*;
 module addr_check_n (
     input logic [31:0]addr,addr_n,addr_n_1,
     input logic [1:0]size,
@@ -10,10 +11,10 @@ na4 NA4(.*);
 napot NAPOT(.*);
 always_comb begin
     case (a_n)
-       2'h0:out =1'b0;
-       2'h1:out =tor_out;
-       2'h2:out =na4_out;
-       2'h3:out =napot_out;
+       OFF:out =1'b0;
+       TOR:out =tor_out;
+       NA4:out =na4_out;
+       NAPOT:out =napot_out;
         default: out=1'b0;
     endcase
 end

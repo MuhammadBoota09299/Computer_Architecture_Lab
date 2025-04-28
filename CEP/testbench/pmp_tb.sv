@@ -3,6 +3,9 @@ module pmp_tb ();
   logic clock, reset, wr_en;
   logic [1:0] priv_mode, size, oper, permission;
   logic [31:0] wdata, rw_addr, addr, rdata;
+  pmpcfg cfg0,cfg1,cfg2,cfg3;
+  logic [31:0] pmpcfg_reg;
+  assign pmpcfg_reg={cfg3,cfg2,cfg1,cfg0};
 
   // Instantiate the PMP module
   pmp PMP(.*);
@@ -24,7 +27,12 @@ module pmp_tb ();
     wdata = 32'b0;
     rw_addr = 32'b0;
     addr = 32'b0;
-    
+    // Initialize PMP configs
+    cfg0 = '{default:0};
+    cfg1 = '{default:0};
+    cfg2 = '{default:0};
+    cfg3 = '{default:0};
+  
     // Apply reset
     #20 reset = 1'b0;
       
@@ -36,11 +44,18 @@ module pmp_tb ();
     priv_mode = 2'b00;
     rw_addr = CSR_PMPADDR0;
     wdata = 32'h12345678;
-    #10;
+    @(posedge clock)
+    wr_en=32'b0;
     rw_addr = CSR_PMPCFG0;
-    wdata = 32'h12345678;
+    cfg0.R=0;cfg0.W=0;cfg0.X=1;cfg0.A=TOR;cfg0.L=0;cfg0.reserved=2'b0;
+    cfg1.R=0;cfg1.W=1;cfg1.X=1;cfg1.A=OFF;cfg1.L=1;cfg1.reserved=2'b0;
+    cfg2.R=1;cfg2.W=0;cfg2.X=1;cfg2.A=NA4;cfg2.L=1;cfg2.reserved=2'b0;
+    cfg3.R=0;cfg3.W=1;cfg3.X=0;cfg3.A=NAPOT;cfg3.L=0;cfg3.reserved=2'b0;
+    @(posedge clock)
+    wdata = pmpcfg_reg;
+    wr_en=1'b1;
     #10;
-
+    wr_en=32'b0;
     $stop;
   end
 
