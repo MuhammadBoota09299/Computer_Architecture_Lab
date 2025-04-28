@@ -42,4 +42,10 @@ typedef enum logic[1:0] {
     NAPOT
  } mode;
 
+typedef enum logic[1:0] { 
+READ,
+WRITE,
+EXECUTE,
+NOTHING
+} operations;
 endpackage
