@@ -27,12 +27,12 @@ typedef enum logic [11:0] {
 } pmp_csr_e;
 
 typedef struct packed {
-    logic        R;      // Read permission (bit 0)
-    logic        W;      // Write permission (bit 1)
-    logic        X;      // Execute permission (bit 2)
-    logic [1:0]  A;      // Address matching mode (bits 4:3)
-    logic [1:0]  reserved; // Reserved bits (bits 6:5)
     logic        L;      // Lock bit (bit 7)
+    logic [1:0]  reserved; // Reserved bits (bits 6:5)
+    logic [1:0]  A;      // Address matching mode (bits 4:3)
+    logic        X;      // Execute permission (bit 2)
+    logic        W;      // Write permission (bit 1)
+    logic        R;      // Read permission (bit 0)
 } pmpcfg;
 
 endpackage

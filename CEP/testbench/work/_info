@@ -12,10 +12,10 @@ Z0 !s99 nomlopt
 cModel Technology
 Z1 dD:/University/Semester_6/CA/Computer_Architecture_Lab/CEP/testbench
 T_opt
-!s110 1745829358
-VVB@dbz6JPg>TR;C4kFJWZ3
+!s110 1745831355
+VN@J;3iL>S2ac?PP70IjN]0
 04 6 4 work pmp_tb fast 0
-=1-18dbf217bfee-680f3dee-251-f4c
+=1-18dbf217bfee-680f45ba-3ce-304c
 R0
 !s12f OEM100
 !s12b OEM100
@@ -27,7 +27,7 @@ OL;O;2024.1;79
 vaddr_check_n
 Z3 2D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/defines/cep_define.sv|pmp_tb.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/tor.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/addr_check_n.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/na4.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/napot.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/pmp.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/pmp_check.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/pmp_registers.sv
 Z4 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z5 !s110 1745829357
+Z5 !s110 1745831353
 !i10b 1
 !s100 f:e0Lz;=j^JB[h`0D0n^[1
 I@Q?@D79fkmY[[IPh9>M?j2
@@ -43,7 +43,7 @@ Z7 OL;L;2024.1;79
 r1
 !s85 0
 31
-Z8 !s108 1745829357.000000
+Z8 !s108 1745831353.000000
 Z9 !s107 D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/pmp_registers.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/pmp_check.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/pmp.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/napot.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/na4.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/addr_check_n.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/tor.sv|pmp_tb.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/defines/cep_define.sv|
 Z10 !s90 -sv|+incdir+D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/defines|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/defines/cep_define.sv|pmp_tb.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/tor.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/addr_check_n.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/na4.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/napot.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/pmp.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/pmp_check.sv|D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/rtl/pmp_registers.sv|
 !i113 0
@@ -55,16 +55,16 @@ R3
 R4
 R5
 !i10b 1
-!s100 Ui99OSQGTCLc64ZRCW=P]0
-I<IDkXe_6lZG<M>3aXQGdW2
+!s100 MeZDPXjSY9kZ1YBWz?Z8S1
+IBT2XgAD`J>m<BTKL06Vk10
 S1
 R1
-w1745821320
+w1745831334
 8D:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/defines/cep_define.sv
 FD:\University\Semester_6\CA\Computer_Architecture_Lab/CEP/defines/cep_define.sv
 !i122 0
 Z13 L0 1 0
-V<IDkXe_6lZG<M>3aXQGdW2
+VBT2XgAD`J>m<BTKL06Vk10
 R7
 r1
 !s85 0
@@ -157,7 +157,7 @@ R2
 vpmp_check
 R3
 R4
-Z15 DXx4 work 10 cep_define 0 22 <IDkXe_6lZG<M>3aXQGdW2
+Z15 DXx4 work 10 cep_define 0 22 BT2XgAD`J>m<BTKL06Vk10
 DXx4 work 17 pmp_check_sv_unit 0 22 B[`DEeczgEzZdEZ4N2GGZ2
 R5
 R6
@@ -271,21 +271,52 @@ R2
 vpmp_tb
 R3
 R4
+R15
+DXx4 work 14 pmp_tb_sv_unit 0 22 M5Xmeh6U5?aQK<Gz3g89U2
 R5
-!i10b 1
-!s100 _ZiU294=BVGA0HP>nZilY3
-IY^n?ncnNhXDD6QmNWP`T:0
-S1
-R1
-w1745826758
-8pmp_tb.sv
-Fpmp_tb.sv
-!i122 0
-L0 1 27
 R6
-R7
 r1
 !s85 0
+!i10b 1
+!s100 AURaY6lVYZ47ijnI=o7a^3
+IP@ESO9Bb^=DM?010cL`aQ0
+!s105 pmp_tb_sv_unit
+S1
+R1
+Z22 w1745830544
+Z23 8pmp_tb.sv
+Z24 Fpmp_tb.sv
+!i122 0
+L0 2 52
+R7
+31
+R8
+R9
+R10
+!i113 0
+R11
+R12
+R2
+Xpmp_tb_sv_unit
+R3
+R4
+R15
+R5
+VM5Xmeh6U5?aQK<Gz3g89U2
+r1
+!s85 0
+!i10b 1
+!s100 WJFUI80Lh[V9Nj9z@ZGh?3
+IM5Xmeh6U5?aQK<Gz3g89U2
+!i103 1
+S1
+R1
+R22
+R23
+R24
+!i122 0
+R13
+R7
 31
 R8
 R9

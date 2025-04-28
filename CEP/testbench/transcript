@@ -14,12 +14,13 @@
 # // and may not be used in any way not expressly authorized by SISW.
 # //
 # vsim -gui -voptargs="+acc" work.pmp_tb -do "add wave -r * ; run -all; run;" 
-# Start time: 13:36:04 on Apr 28,2025
+# Start time: 14:09:21 on Apr 28,2025
 # ** Note: (vsim-8009) Loading existing optimized design _opt
 # Loading sv_std.std
+# Loading work.cep_define(fast)
+# Loading work.pmp_tb_sv_unit(fast)
 # Loading work.pmp_tb(fast)
 # Loading work.pmp(fast)
-# Loading work.cep_define(fast)
 # Loading work.pmp_registers_sv_unit(fast)
 # Loading work.pmp_registers(fast)
 # Loading work.pmp_check_sv_unit(fast)
@@ -30,9 +31,8 @@
 # Loading work.napot(fast)
 # add wave -r * 
 #  run -all
-# ** Note: $finish    : pmp_tb.sv(23)
-#    Time: 0 ns  Iteration: 0  Instance: /pmp_tb
-# 1
-# Break in Module pmp_tb at pmp_tb.sv line 23
+# ** Note: $stop    : pmp_tb.sv(44)
+#    Time: 40 ns  Iteration: 0  Instance: /pmp_tb
+# Break in Module pmp_tb at pmp_tb.sv line 44
 #  run
 # 
