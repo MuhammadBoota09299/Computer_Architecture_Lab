@@ -13,7 +13,7 @@ module pmp_check (
     logic out0,out1,out2,out3,out4,out5,out6,out7,out8,out9,out10,out11,out12,out13,out14,out15; 
     logic [1:0] pre_permission;
     logic [15:0]pri;
-    logic [3:0]entry_num;
+    logic [4:0]entry_num;
     logic [31:0]pmpcfg_reg_selected;
     logic oper_permission,pre_lock;
 
@@ -51,23 +51,23 @@ module pmp_check (
 always_comb begin : priority_circuit
     pri={out15,out14,out13,out12,out11,out10,out9,out8,out7,out6,out5,out4,out3,out2,out1,out0};
     casez (pri)  // casez allows ? for don't-care bits
-        16'b???????????????1: entry_num = 4'd0;
-        16'b??????????????10: entry_num = 4'd1;
-        16'b?????????????100: entry_num = 4'd2;
-        16'b????????????1000: entry_num = 4'd3;
-        16'b???????????10000: entry_num = 4'd4;
-        16'b??????????100000: entry_num = 4'd5;
-        16'b?????????1000000: entry_num = 4'd6;
-        16'b????????10000000: entry_num = 4'd7;
-        16'b???????100000000: entry_num = 4'd8;
-        16'b??????1000000000: entry_num = 4'd9;
-        16'b?????10000000000: entry_num = 4'd10;
-        16'b????100000000000: entry_num = 4'd11;
-        16'b???1000000000000: entry_num = 4'd12;
-        16'b??10000000000000: entry_num = 4'd13;
-        16'b?100000000000000: entry_num = 4'd14;
-        16'b1000000000000000: entry_num = 4'd15;
-        default:entry_num=4'b0;
+        16'b???????????????1: entry_num = 5'd0;
+        16'b??????????????10: entry_num = 5'd1;
+        16'b?????????????100: entry_num = 5'd2;
+        16'b????????????1000: entry_num = 5'd3;
+        16'b???????????10000: entry_num = 5'd4;
+        16'b??????????100000: entry_num = 5'd5;
+        16'b?????????1000000: entry_num = 5'd6;
+        16'b????????10000000: entry_num = 5'd7;
+        16'b???????100000000: entry_num = 5'd8;
+        16'b??????1000000000: entry_num = 5'd9;
+        16'b?????10000000000: entry_num = 5'd10;
+        16'b????100000000000: entry_num = 5'd11;
+        16'b???1000000000000: entry_num = 5'd12;
+        16'b??10000000000000: entry_num = 5'd13;
+        16'b?100000000000000: entry_num = 5'd14;
+        16'b1000000000000000: entry_num = 5'd15;
+        default:entry_num=5'd16;
     endcase
 end
 
@@ -88,7 +88,7 @@ always_comb begin : selction_of_pmpcfg_reg_and_entry
         4'd3:pmpcfg_selected=pmpcfg_reg_selected[31:24];
         default: pmpcfg_reg_selected=8'b0;
     endcase
-    if (pmpcfg_selected.A != OFF) begin
+    if (entry_num !=5'd16) begin
     case (oper)
         2'b00:oper_permission=pmpcfg_selected.R;
         2'b01:oper_permission=pmpcfg_selected.W;
