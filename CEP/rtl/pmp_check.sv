@@ -88,12 +88,15 @@ always_comb begin : selction_of_pmpcfg_reg_and_entry
         4'd3:pmpcfg_selected=pmpcfg_reg_selected[31:24];
         default: pmpcfg_reg_selected=8'b0;
     endcase
+    if (pmpcfg_selected.A != OFF) begin
     case (oper)
         2'b00:oper_permission=pmpcfg_selected.R;
         2'b01:oper_permission=pmpcfg_selected.W;
         2'b10:oper_permission=pmpcfg_selected.X;
         default:oper_permission=1'b0; 
     endcase
+    end
+    else oper_permission=1'b1;
 end
 assign pre_permission=(oper_permission) ? 2'b11 : oper; 
 assign pre_lock =(~pmpcfg_selected.L) && (priv_mode==2'b0);
