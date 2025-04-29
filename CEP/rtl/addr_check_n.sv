@@ -11,10 +11,10 @@ na4 NA4(.*);
 napot NAPOT(.*);
 always_comb begin
     case (a_n)
-       OFF:out =1'b0;
-       TOR:out =tor_out;
-       NA4:out =na4_out;
-       NAPOT:out =napot_out;
+       2'b00:out =1'b0;
+       2'b01:out =tor_out;
+       2'b10:out =na4_out;
+       2'b11:out =napot_out;
         default: out=1'b0;
     endcase
 end

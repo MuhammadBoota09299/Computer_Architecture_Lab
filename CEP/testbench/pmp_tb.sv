@@ -43,11 +43,11 @@ module pmp_tb ();
     oper = WRITE;
     priv_mode = 2'b00;
     rw_addr = CSR_PMPADDR0;
-    wdata = 32'h12345678;
+    wdata = 32'h20000001;
     @(posedge clock)
     wr_en=32'b0;
     rw_addr = CSR_PMPCFG0;
-    cfg0.R=0;cfg0.W=0;cfg0.X=1;cfg0.A=TOR;cfg0.L=0;
+    cfg0.R=0;cfg0.W=0;cfg0.X=1;cfg0.A=NAPOT;cfg0.L=0;
     cfg1.R=0;cfg1.W=1;cfg1.X=1;cfg1.A=OFF;cfg1.L=1;
     cfg2.R=1;cfg2.W=0;cfg2.X=1;cfg2.A=NA4;cfg2.L=1;
     cfg3.R=0;cfg3.W=1;cfg3.X=0;cfg3.A=NAPOT;cfg3.L=0;
@@ -57,6 +57,26 @@ module pmp_tb ();
     @(posedge clock)
     wr_en=32'b0;
     priv_mode=2'b1;
+    addr = 32'h20000000;
+    @(posedge clock)
+    oper=READ;
+    @(posedge clock)
+    oper=EXECUTE;
+
+//                               address 2
+    @(posedge clock)
+    addr = 32'h20000001;
+    oper = READ;
+    @(posedge clock)
+    oper=READ;
+    @(posedge clock)
+    oper=EXECUTE;
+    @(posedge clock)
+    
+//                               address 3
+    @(posedge clock)
+    addr = 32'h20000003;
+    oper = READ;
     @(posedge clock)
     oper=READ;
     @(posedge clock)
