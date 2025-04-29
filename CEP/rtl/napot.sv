@@ -9,7 +9,7 @@ logic [31:0]ones,base,offset;
 assign ones=(~(32'b0) << position+1);
 assign base=(addr_n & (ones));
 assign offset=(32'h8<<position);
-assign napot_out=(((base) + offset-1) >= (addr+size)) && (addr >= (base));
+assign napot_out=(((base) + (offset-1)) >= (addr+size)) && (addr >= (base));
 
 
 
