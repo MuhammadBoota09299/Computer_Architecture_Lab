@@ -3,10 +3,17 @@ module pmp_tb ();
   logic clock, reset, wr_en;
   logic [1:0] priv_mode, size, oper, permission;
   logic [31:0] wdata, rw_addr, addr, rdata;
-  pmpcfg cfg0,cfg1,cfg2,cfg3;
-  logic [31:0] pmpcfg_reg;
-  assign pmpcfg_reg={cfg3,cfg2,cfg1,cfg0};
+  pmpcfg cfg0,cfg1,cfg2,cfg3,cfg4,cfg5,cfg6,cfg7,cfg8,cfg9,cfg10,cfg11,cfg12,cfg13,cfg14,cfg15;
+  logic [31:0]pmpaddr0,pmpaddr1,pmpaddr2,pmpaddr3,pmpaddr4,pmpaddr5,pmpaddr6,pmpaddr7,
+    pmpaddr8,pmpaddr9,pmpaddr10,pmpaddr11,pmpaddr12,pmpaddr13,pmpaddr14,pmpaddr15;
 
+  logic [31:0] pmpcfg0, pmpcfg1, pmpcfg2, pmpcfg3;
+
+  assign {cfg3,cfg2,cfg1,cfg0}    =pmpcfg0;
+  assign {cfg6,cfg6,cfg5,cfg4}    =pmpcfg1;
+  assign {cfg10,cfg9,cfg8,cfg7}   =pmpcfg2;
+  assign {cfg14,cfg13,cfg12,cfg11}=pmpcfg3;
+  
   // Instantiate the PMP module
   pmp PMP(.*);
 

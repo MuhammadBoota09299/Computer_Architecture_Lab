@@ -71,8 +71,6 @@ always_comb begin : priority_circuit
     endcase
 end
 
-
-
 always_comb begin : selction_of_pmpcfg_reg_and_entry
     case (entry_num[3:2])
         4'd0:pmpcfg_reg_selected=pmpcfg0_data;
@@ -87,7 +85,7 @@ always_comb begin : selction_of_pmpcfg_reg_and_entry
         4'd2:pmpcfg_selected=pmpcfg_reg_selected[23:16];
         4'd3:pmpcfg_selected=pmpcfg_reg_selected[31:24];
         default: pmpcfg_reg_selected=8'b0;
-    endcase
+    endcase 
     if (entry_num !=5'd16) begin
     case (oper)
         2'b00:oper_permission=pmpcfg_selected.R;
@@ -96,9 +94,14 @@ always_comb begin : selction_of_pmpcfg_reg_and_entry
         default:oper_permission=1'b0; 
     endcase
     end
-    else oper_permission=1'b1;
+    else begin
+       oper_permission=1'b1;
+       pmpcfg_selected.L=1'b0; 
+    end 
 end
+
 assign pre_permission=(oper_permission) ? 2'b11 : oper; 
+//lock bit
 assign pre_lock =(~pmpcfg_selected.L) && (priv_mode==2'b0);
 assign permission = (pre_lock) ? {1'b1 ,pre_lock} : pre_permission ;
 

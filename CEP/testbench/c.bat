@@ -32,3 +32,4 @@ echo Starting simulation...
 vsim -c -voptargs="+acc" -do "run -all; quit" pmp_tb
 
 echo Simulation complete!
+pause
