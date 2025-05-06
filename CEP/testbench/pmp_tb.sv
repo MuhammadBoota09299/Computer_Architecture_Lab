@@ -51,11 +51,11 @@ module pmp_tb #(parameter NUM_OF_TEST = 1000) ();
 //
 task automatic pmp_test(input int test_num);
 for ( int j=0 ;j<=test_num ;j++ ) begin
-  repeat(6)begin
+  repeat(32)begin
     @(posedge clock)
     pmp_register_write();
   end
-  repeat(10)begin
+  repeat(100)begin
     addr=$urandom;
     priv_mode=$urandom_range(0,3);
     size=$urandom;
@@ -96,7 +96,7 @@ task automatic error_check();
       end
 
       NA4: begin
-        if ((pmpaddr[k] <=(addr+size))&&((addr+size) <(pmpaddr[k]+3))) begin
+        if ((pmpaddr[k] <=(addr+size))&&((addr+size) <(pmpaddr[k]+4))) begin
           #10;
           permission_check(k);
           #10;
@@ -107,7 +107,7 @@ task automatic error_check();
 
       NAPOT: begin
         // NAPOT requires encoded size in address bits
-        casez (addr)  // casez allows ? for don't-care bits
+        casez (pmpaddr[k])  // casez allows ? for don't-care bits
           32'b???????????????????????????????0: width = 5'd0;
           32'b??????????????????????????????01: width = 5'd1;
           32'b?????????????????????????????011: width = 5'd2;
