@@ -1,11 +1,10 @@
 import cep_define ::*;
-module pmp_tb ();
+module pmp_tb #(parameter NUM_OF_TEST = 1000) ();
   logic clock, reset, wr_en;
   logic [1:0] priv_mode, size, oper, permission;
-  logic [31:0] wdata, rw_addr, addr, rdata;    
+  logic [31:0] wdata, rw_addr, addr, rdata, base,offset;    
   pmpcfg cfg[15:0];      // Array of 16 pmpcfg structures: cfg[0] to cfg[15]
-  pmpcfg _cfg[3:0];
-  logic [7:0]_pmpcfg_reg_data;
+  logic [31:0]_pmpcfg_reg_data;
   logic [31:0] _pmpaddr_reg_data;
   logic [4:0]width;     
   logic [31:0] pmpaddr[15:0]; // Array of 16 32-bit PMP addresses: pmpaddr[0] to pmpaddr[15]
@@ -16,7 +15,6 @@ module pmp_tb ();
   assign {cfg[7],cfg[6],cfg[5],cfg[4]}    =_pmpcfg[1];
   assign {cfg[11],cfg[10],cfg[9],cfg[8]}  =_pmpcfg[2];
   assign {cfg[15],cfg[14],cfg[13],cfg[12]}=_pmpcfg[3];
-  assign {_cfg[3], _cfg[2], _cfg[1], _cfg[0]} = rdata;
   // Instantiate the PMP module
   pmp PMP(.*);
 
@@ -30,6 +28,8 @@ module pmp_tb ();
   initial begin
     // Initialize all inputs
     reset = 1'b1;
+    _pmpcfg={8'b0,8'b0,8'b0,8'b0};
+    pmpaddr={32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0};
     oper = READ;
     wr_en = 1'b0;
     priv_mode = 2'b01;
@@ -44,56 +44,32 @@ module pmp_tb ();
      
                                               // Test case 1: Basic write and read
     @(posedge clock)
-      pmp_test(100000); //no of tests
+      pmp_test(NUM_OF_TEST); //no of tests
     @(posedge clock)
     $stop;
-  end
-
-  // Waveform dumping (for debugging)
-  initial begin
-    $dumpfile("pmp_tb.vcd");
-    $dumpvars(0, pmp_tb);
   end
 //
 task automatic pmp_test(input int test_num);
 for ( int j=0 ;j<=test_num ;j++ ) begin
-  pmp_register_write();
+  repeat(6)begin
+    @(posedge clock)
+    pmp_register_write();
+  end
+  repeat(10)begin
+    addr=$urandom;
+    priv_mode=$urandom_range(0,3);
+    size=$urandom;
+    oper=$urandom_range(0,2);
+    @(posedge clock)
+    error_check();
+    #20;
+  end
   @(posedge clock)
-  addr=$urandom;
-  priv_mode=$urandom_range(0,3);
-  size=$urandom;
-  oper=$urandom_range(0,2);
+  reset=1'b1;
+  _pmpcfg={8'b0,8'b0,8'b0,8'b0};
+  pmpaddr={32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0,32'b0};
   @(posedge clock)
-  error_check();
-  @(posedge clock)
-  addr=$urandom;
-  priv_mode=$urandom_range(0,3);
-  size=$urandom;
-  oper=$urandom_range(0,2);
-  @(posedge clock)
-  error_check();
-  @(posedge clock)
-  addr=$urandom;
-  priv_mode=$urandom_range(0,3);
-  size=$urandom;
-  oper=$urandom_range(0,2);
-  @(posedge clock)
-  error_check();
-  @(posedge clock)
-  addr=$urandom;
-  priv_mode=$urandom_range(0,3);
-  size=$urandom;
-  oper=$urandom_range(0,2);
-  @(posedge clock)
-  error_check();
-  @(posedge clock)
-  addr=$urandom;
-  priv_mode=$urandom_range(0,3);
-  size=$urandom;
-  oper=$urandom_range(0,2);
-  @(posedge clock)
-  error_check();
-  #20;
+  reset=1'b0;
 end
 endtask
 
@@ -102,22 +78,28 @@ task automatic error_check();
     case (cfg[k].A)
       TOR: begin
         if (k == 0) begin
-          if ((0<=addr)&&(addr<pmpaddr[k])) begin
+          if ((0<=(addr+size))&&((addr+size)<pmpaddr[k])) begin
+            #10;
             permission_check(k);
+            #10;
             pmp_reg_check(k);
             break;
           end
         end 
-        else if ((pmpaddr[k-1]<= addr)&&(addr<pmpaddr[k])) begin
+        else if ((pmpaddr[k-1]<= (addr+size))&&((addr+size)<pmpaddr[k])) begin
+          #10;
           permission_check(k);
+          #10;
           pmp_reg_check(k);
           break;
         end
       end
 
       NA4: begin
-        if ((pmpaddr[k] <=addr)&&(addr<(pmpaddr[k]+3))) begin
+        if ((pmpaddr[k] <=(addr+size))&&((addr+size) <(pmpaddr[k]+3))) begin
+          #10;
           permission_check(k);
+          #10;
           pmp_reg_check(k);
           break;
         end 
@@ -160,17 +142,21 @@ task automatic error_check();
           32'b01111111111111111111111111111111: width = 5'd31;
                 default: width = 5'd0;  // When no bits are set
     endcase
-        if ((pmpaddr[k]<=addr)&&(addr<(pmpaddr[k]+ 8<<width))) begin
+      base=pmpaddr[k]&((32'hFFFFFFFF)<<width);
+      offset=8<<width;
+      #10;
+        if ((base<=(addr+size))&&((addr+size)<(base+offset))) begin
+          #10;
           permission_check(k);
+          #10;
           pmp_reg_check(k);
           break;
         end
       end
       default: begin
-        if (permission==3'b11)  $display("Test has been passed");
-
       end
     endcase
+    #10;
   end
 endtask
 
@@ -179,17 +165,20 @@ task pmpcfg_read(input logic [3:0] num, output logic [31:0] pmpcfg_reg_data );
     priv_mode = 2'b00;
     wr_en = 1'b0;
     rw_addr = 12'h3A0 + num[3:2]; // Accesses pmpcfg0, pmpcfg1, etc.
-    @(posedge clock)
-    pmpcfg_reg_data = _cfg[num[1:0]]; // Select the correct byte
-
+    #10;
+    pmpcfg_reg_data = rdata; // Select the correct byte
+    #10;
+    priv_mode = 2'b01;
 endtask
 
 task pmpaddr_read(input logic [3:0]num ,output logic [31:0] pmpaddr_reg_data);
     priv_mode = 2'b00;
     wr_en = 1'b0;
     rw_addr = 12'h3B0 +num;
-    @(posedge clock)
+    #10;
     pmpaddr_reg_data=rdata;
+    #10;
+    priv_mode = 2'b01;
 endtask
 
 //                                  WRITE FUNCTION                // 
@@ -198,39 +187,39 @@ task automatic pmp_register_write();
     priv_mode = 2'b00;
     i=$urandom_range(0, 15); // for pmpaddr register
     rw_addr = 12'h3B0 +i; 
-    pmpaddr[i]=$urandom;
+    if (cfg[i].L == 1'b0) pmpaddr[i]=$urandom;
     wdata = pmpaddr[i] ;
-    @(posedge clock)
+    #5;
     wr_en = 1'b1;
     @(posedge clock)
-    wr_en = 1'b0;
-    i=$urandom_range(0, 3); // for pmpcfg register
-    rw_addr = 12'h3A0 +i ;
-    _pmpcfg[i]=$urandom;
-    wdata = _pmpcfg[i] ;
-    @(posedge clock)
+    wr_en = 1'b0; // for pmpcfg register
+    rw_addr = 12'h3A0 +i[3:2];
+    if (cfg[{i[3:2],2'b00}].L ==1'b0 && cfg[{i[3:2],2'b01}].L ==1'b0 && cfg[{i[3:2],2'b10}].L ==1'b0 && cfg[{i[3:2],2'b11}].L ==1'b0) _pmpcfg[i[3:2]]=$urandom;
+    wdata = _pmpcfg[i[3:2]] ;
+    #5;
     wr_en=1'b1;
     @(posedge clock)
     wr_en=32'b0;
     priv_mode=2'b1;
 endtask
 
-function void permission_check(int k);
+task automatic permission_check(input logic[3:0] num);
   case (oper)
-    2'b0:if ((cfg[k].R==1 && permission==2'b11) || (cfg[k].R==0 && permission==oper)) $display("Test has been passed");
-    2'b1:if ((cfg[k].W==1 && permission==2'b11) || (cfg[k].R==0 && permission==oper)) $display("Test has been passed");
-    2'b10:if ((cfg[k].X==1 && permission==2'b11) || (cfg[k].R==0 && permission==oper)) $display("Test has been passed");
+    2'b00:if ((cfg[num].R==1'b1 && permission==2'b11) || (cfg[num].R==1'b0 && permission==oper)) $display("Test has been passed");
+    2'b01:if ((cfg[num].W==1'b1 && permission==2'b11) || (cfg[num].W==1'b0 && permission==oper)) $display("Test has been passed");
+    2'b10:if ((cfg[num].X==1'b1 && permission==2'b11) || (cfg[num].X==1'b0 && permission==oper)) $display("Test has been passed");
     default: $display("Test has been FAILED");
   endcase;
-endfunction
+endtask
 
 task automatic pmp_reg_check(input logic [3:0]num);
   pmpcfg_read(num,_pmpcfg_reg_data);
+  @(posedge clock)
   pmpaddr_read(num,_pmpaddr_reg_data);
   @(posedge clock)
-  if ((cfg[num]==_pmpcfg_reg_data) && (pmpaddr[num]==_pmpaddr_reg_data)) begin
-    $display("Selected pmpcfg is L=%d,A=%d,X=%d,W=%d,R=%d, and pmpaddr is %h",cfg[num].L,cfg[num].A,cfg[num].X,cfg[num].W,cfg[num].R,pmpaddr[num]);
-    $display("Our addr=%h and size=%h and oper=%d",addr,size,oper);
+  if ((_pmpcfg[num[3:2]]==_pmpcfg_reg_data) && (pmpaddr[num]==_pmpaddr_reg_data)) begin
+    $display("Selected pmpcfg is L=%d,A=%d,X=%d,W=%d,R=%d, and pmpaddr is %b",cfg[num].L,cfg[num].A,cfg[num].X,cfg[num].W,cfg[num].R,pmpaddr[num]);
+    $display("Our addr=%b , size=%h , oper=%d, and permission=%d",addr,size,oper,permission);
   end
   else $display("configurations does not matches");
 endtask //automatic

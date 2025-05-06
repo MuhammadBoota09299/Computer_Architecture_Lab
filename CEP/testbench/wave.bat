@@ -14,7 +14,7 @@ if %ERRORLEVEL% GEQ 1 (
 
 :: 2. Run simulation with waveform setup
 echo Starting simulation with waveform logging...
-vsim -gui -voptargs="+acc" work.pmp_tb -do "add wave -r * ; run -all;"
+vsim -gui -voptargs="+acc" work.pmp_tb -do "add wave -r sim:/pmp_tb/*;add wave sim:/pmp_tb/PMP/* ; run -all;"
 
 if %ERRORLEVEL% GEQ 1 (
     echo ERROR: Simulation failed
