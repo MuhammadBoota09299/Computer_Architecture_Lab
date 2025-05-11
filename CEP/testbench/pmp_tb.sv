@@ -51,11 +51,9 @@ module pmp_tb #(parameter NUM_OF_TEST = 1000) ();
 //
 task automatic pmp_test(input int test_num);
 for ( int j=0 ;j<=test_num ;j++ ) begin
-  repeat(32)begin
-    @(posedge clock)
     pmp_register_write();
-  end
-  repeat(100)begin
+    repeat(10) begin
+    @(posedge clock)
     addr=$urandom;
     priv_mode=$urandom_range(0,3);
     size=$urandom;
@@ -185,21 +183,23 @@ endtask
 
 task automatic pmp_register_write();
     priv_mode = 2'b00;
-    i=$urandom_range(0, 15); // for pmpaddr register
-    rw_addr = 12'h3B0 +i; 
-    if (cfg[i].L == 1'b0) pmpaddr[i]=$urandom;
-    wdata = pmpaddr[i] ;
-    #5;
-    wr_en = 1'b1;
-    @(posedge clock)
-    wr_en = 1'b0; // for pmpcfg register
-    rw_addr = 12'h3A0 +i[3:2];
-    if (cfg[{i[3:2],2'b00}].L ==1'b0 && cfg[{i[3:2],2'b01}].L ==1'b0 && cfg[{i[3:2],2'b10}].L ==1'b0 && cfg[{i[3:2],2'b11}].L ==1'b0) _pmpcfg[i[3:2]]=$urandom;
-    wdata = _pmpcfg[i[3:2]] ;
-    #5;
-    wr_en=1'b1;
-    @(posedge clock)
-    wr_en=32'b0;
+    for (i = 0; i<16;i++ ) begin
+      rw_addr = 12'h3B0 +i; 
+      if (cfg[i].L == 1'b0) pmpaddr[i]=$urandom;
+      wdata = pmpaddr[i] ;
+      #5;
+      wr_en = 1'b1;
+      @(posedge clock)
+      wr_en = 1'b0; // for pmpcfg register
+      rw_addr = 12'h3A0 +i[3:2];
+      if (cfg[{i[3:2],2'b00}].L ==1'b0 && cfg[{i[3:2],2'b01}].L ==1'b0 && cfg[{i[3:2],2'b10}].L ==1'b0 && cfg[{i[3:2],2'b11}].L ==1'b0) _pmpcfg[i[3:2]]=$urandom;
+      wdata = _pmpcfg[i[3:2]] ;
+      #5;
+      wr_en=1'b1;
+      @(posedge clock)
+      wr_en=32'b0;
+      #10;
+    end
     priv_mode=2'b1;
 endtask
 
